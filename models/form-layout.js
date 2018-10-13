@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/nodeauth', { useNewUrlParser: true });
+mongoose.connect('mongodb://178.62.8.45:27017/nodeauth', { useNewUrlParser: true });
 
     const FormLayoutSchema = mongoose.Schema({
         form_layout_no: {
