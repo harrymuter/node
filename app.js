@@ -122,7 +122,7 @@ app.use('/update-a-form', updateAForm);
 //
 // Configs
 //
-var port = 80;
+var port = 3000;
 var localhost = "127.0.0.1";
 app.listen(port, localhost);
 
