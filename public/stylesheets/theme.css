@@ -1,0 +1,245 @@
+
+
+.header {
+    width: 100%;
+    float: left;
+    display: inline;
+}
+
+.inputs {
+    font-size: 1em;
+    width: 44%;
+    padding: 2%;
+    margin: 1%;
+    border: 0;
+    border-radius: 3px;
+    background-color: #e3f2fd;
+    float: left;
+    display: inline;
+}
+
+.inputs:hover{
+    background-color: #eee;
+}
+
+.level {
+    padding: 1%;
+    margin: 1%;
+    border-radius: 3px;
+    background-color: #eeeeee;
+}
+
+label {
+    float: left;
+    display: block;
+    color: #182738;
+    font-size: 0.9em;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+}
+
+.outer {
+    width: 100%;
+    margin-bottom: 1%;
+    padding: 1%;
+    float: left;
+}
+
+.inner {
+    color: #182738;
+    width: 100%;
+    margin-top: 2%;
+    padding: 1%;
+    float: left;
+    border-top: 1px dashed #999999;
+}
+
+.question {
+    max-width: 65%;
+    padding: 0;
+    margin: 0;
+    float: left;
+    display: inline;
+}
+
+.answer {
+    max-width: 35%;
+    padding: 0;
+    margin: 0;
+    float: right;
+    display: inline;
+}
+
+.form-content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    float: left;
+    display: none;
+}
+
+.text-area {
+    min-height: 8em;
+    width: 92%;
+    padding-left: 1%;
+    padding-bottom: 1%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    border: 1px solid #314e71;
+    color: #314e71;
+    font-size: 1.1em;
+    border-radius: 3px;
+    background-color: #fff;
+    float: left;
+    display: inline;
+}
+
+.section {
+    width: 100%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    padding: 1%;
+    float: left;
+    background-color: #f8f9fa;
+    border: 2px solid #dae0e5;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+
+::-webkit-input-placeholder  {
+    color: #182738;
+    font-size: 1em;
+}
+
+::-moz-placeholder  {
+    color: #182738;
+    font-size: 1em;
+}
+
+:-ms-input-placeholder  {
+    color: #182738;
+    font-size: 1em;
+}
+
+:-moz-placeholder {
+    color: #182738;
+    font-size: 1em;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.form_label {
+    font-size: 0.8em;
+    background-color: #ffffff;
+    text-align: center;
+    float: left;
+    padding: 1%;
+    margin: 1%;
+    border-radius: 3px;
+    color: #182738;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.grey {
+    background-color: #f1f1f1;
+    color: #182738;
+}
+
+.logo-container {
+    float: right;
+    width: 10%;
+}
+
+.logo {
+    width: 100%;
+    float: right;
+}
+
+.top {
+    float: left;
+    width: 96%;
+    padding: 1%;
+    margin: 1%;
+}
+
+.title {
+    width: 96%;
+    padding: 1%;
+    margin: 1%;
+}
+
+.show {
+    display: block;
+}
+
+.school {
+    float: left;
+    vertical-align: middle;
+}
+
+.hidden {
+    display: none;
+}
+
+.fieldset {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+input[type="radio"]{
+    cursor: pointer;
+}
+
+/*input[type="file"]{*/
+    /*display: none;*/
+/*}*/
+
+.radio-label {
+    margin-right: 1em;
+}
+
+.section-white {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 2em;
+    float: left;
+}
+
+.file-display {
+    float: left;
+    width: 100%;
+}
+
+.name-line {
+    background-color: #e3f2fd;
+    padding: 0.5em;
+}
+
+.glyphicon-remove {
+    cursor: pointer;
+}
+
+.delete {
+    cursor: pointer;
+    text-align: center;
+    padding: 0;
+}
+
+.move {
+    cursor: pointer;
+    text-align: center;
+    padding: 0;
+}
+
+.right-padding {
+    padding-right: 1em;
+}

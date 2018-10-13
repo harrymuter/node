@@ -1,0 +1,13 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+<div class="container">
+<div class="jumbotron" style="background-color: #FFF">
+    <% if(admin){ %>
+        <%- include partials/admin.ejs %>
+    <% } else { %>
+        <%- include partials/user-dash.ejs %>
+    <% } %>
+</div>
+</div>
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

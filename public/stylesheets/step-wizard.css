@@ -1,0 +1,9 @@
+
+.progress {
+    color: #fff;
+    text-align: center;
+    border: 1em solid #007bff;
+    width: 100%;
+    height: 100%;
+    line-height: 150%;
+}

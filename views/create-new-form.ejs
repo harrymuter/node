@@ -1,0 +1,72 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+<div class="container">
+    <div class="jumbotron" style="background-color: #FFF; margin: 0; padding-bottom: 0">
+
+        <h3>Create a Form</h3>
+
+        <div class="top-buffer-lg"></div>
+        <div class="row col-12">
+            <label class="col-4 col-form-label" for="form_type">Form Type *</label>
+            <div class="form-group col-4">
+                <select type="text" name="form_type" id="form_type" class="form-control" required >
+                    <option value="individual">Individual</option>
+                    <option value="module">Module</option>
+                </select>
+            </div>
+        </div>
+
+        <%- include partials/edit.ejs %>
+    </div>
+
+    <div class="jumbotron" style="background-color: #FFFFFF;">
+        <h5>Preview:</h5>
+        <p class="row col-12">
+            <input class="form-check-input" type="checkbox" id="toggle-controls">
+            <label class="form-check-label" for="toggle-controls">
+                Toggle Controls
+            </label>
+        </p>
+        <hr>
+        <div class="jumbotron">
+            <form class="form-row" id="newForm">
+                <div class="row col-12">
+                    <h3 id="form_title"></h3>
+                </div>
+                <div class="row col-12">
+                    <h6 class="text-secondary" id="form_subtitle"></h6>
+                </div>
+                <div class="row col-12 top-buffer"></div>
+                <hr>
+                <div class="row col-12">
+                    <label class="col-4 col-form-label" for="project_title">Title *</label>
+                    <div class="form-group col-4">
+                        <input type="text" name="project_title" id="project_title" class="form-control" required />
+                    </div>
+                </div>
+                <hr>
+            </form>
+        </div>
+
+        <form class="form-row" id="submit_layout">
+            <div class="form-group col-2">
+                <button type="submit" class="btn btn-success">Create Form</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+</div>
+
+<script>
+
+    var form_name = "";
+    var array_of_questions = [];
+
+</script>
+<script src="javascripts/create-form.js"></script>
+
+
+
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

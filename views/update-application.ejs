@@ -1,0 +1,35 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+<script>
+</script>
+<div class="container">
+    <div class="jumbotron" style="background-color: #FFFFFF">
+    <form action="/update-application" method="post">
+            <div class="jumbotron" id="form">
+                <%- layout.template %>
+        </div>
+        <input type="submit" class="btn btn-success" value="Confirm and Update"/>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+
+            $("#project_title").val("<%= form.project_title %>");
+
+            <% for(answer in form.answers){ %>
+                var name = '#'+<%= answer %>;
+                $(name).val("<%= form.answers[answer] %>");
+            <%}%>
+
+        });
+
+    </script>
+
+</div>
+
+
+<script src="javascripts/form-collapse.js"></script>
+
+
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

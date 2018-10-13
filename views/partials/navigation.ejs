@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+
+    <a class="navbar-brand" href="/"><img class="nav_image" src="images/logo.png" height="30"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link<% switch (page_name) {
+                case 'dashboard':
+                case 'update':
+                case 'view':
+                %> active<% }%>" href="/dashboard">Dashboard</a>
+            </li>
+
+            <li class="nav-item dropdown <% switch (page_name) {
+                case 'forms-individual':
+                case 'forms-module':
+                case 'new-application':
+                %> active<% }%>">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    New Ethics Form
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item <% switch (page_name) {
+                case 'forms-individual':
+                %> active<% }%>" href="forms?type=individual">Individual Form</a>
+                    <a class="dropdown-item <% switch (page_name) {
+                case 'forms-module':
+                %> active<% }%>" href="forms?type=module">Module Form</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">What do I need?</a>
+                </div>
+            </li>
+
+            <% if (admin == true) { %>
+            <li class="nav-item dropdown <% switch (page_name) {
+                case 'create-form':
+                case 'update-form':
+                %> active<% }%>">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin Panel
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    <a class="dropdown-item<% switch (page_name) {
+                case 'create-form':
+                %> active<% }%>" href="create-form">Create a Form</a>
+                    <a class="dropdown-item<% switch (page_name) {
+                case 'update-form':
+                %> active<% }%>" href="update-a-form">Update a Form</a>
+                </div>
+            </li>
+
+            <% } %>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/FAQs">FAQs</a>
+            </li>
+
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="false"></span> Settings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item" href="/profile">My Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logout">Log Out</a>
+                </div>
+            </li>
+            <li class="nav-item"><a class="nav-link padding"></a></li>
+        </ul>
+    </div>
+</nav>

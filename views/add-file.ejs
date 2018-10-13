@@ -1,0 +1,46 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+
+<div class="container">
+
+    <div class="jumbotron" style="background-color: #FFF">
+        <form id="uploadForm" method="post" enctype="multipart/form-data">
+
+            <legend class="hidden">Ethics Check</legend>
+            <h3>Documents</h3>
+            <div class="row" style="padding-bottom: 2em;"></div>
+            <p>
+                This page provides an opportunity to upload any further documents that you believe might be useful. This file should be <strong>no larger than 2MB</strong> and should be uploaded
+                in either a <strong>PDF or Word format</strong>.
+            </p>
+            <div class="row" style="padding-bottom: 2em;"></div>
+
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="hidden" name="seq" value="<%= query.seq %>" class="custom-file-input">
+                    <input type="hidden" name="code" value="<%= query.code %>" class="custom-file-input">
+                    <input type="file" name="file" class="custom-file-input" id="file">
+                    <label id="file_label" class="custom-file-label pointer" for="file">Click to add a file</label>
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom: 1em;"></div>
+
+            <button type="submit" class="btn btn-success">Add File <span class="glyphicon glyphicon-plus"></span></button>
+            <a href="/dashboard" ><div class="btn btn-secondary">Finish Without <span class="glyphicon glyphicon-chevron-right"></span></div></a>
+
+            <div class="row" style="padding-bottom: 4em;"></div>
+            <small>
+                *You can add this file later by editing your application.
+            </small>
+            <div class="row" style="padding-bottom: 4em;"></div>
+        </form>
+
+    </div>
+
+</div>
+
+<script src="javascripts/file_picker.js"></script>
+
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

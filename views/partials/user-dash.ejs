@@ -1,0 +1,195 @@
+
+<div class="col-md-12" style="margin-bottom: 2em;">
+    <h2>Hi, <% if (ka) { %> <%= ka %> <% } else{ %> <%= fname %> <% } %></h2>
+</div>
+
+<% if(visited==false){ %>
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <strong>Looks like you're new here!</strong>
+    <hr>
+    <p class="mb-0">Welcome to the UEA-REC Ethics Application System! This website should be used to manage ethics approval for
+        any projects you are undertaking. If you encounter any problems using the site, please visit out FAQ page <a href="/FAQ">here</a>;
+        if you still cannot find an answer to your question, do not hesitate to contact you supervisor.</p>
+    <button id="markAsVisited" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% }
+
+var s=0; var p=0; var r=0;
+for (var i=0; i < forms.length; i++) {
+if(forms[i].status === "approved"){
+s++;
+}
+if(forms[i].status === "pending"){
+p++;
+}
+if(forms[i].status === "review"){
+r++;
+}
+}
+
+if(forms.length > 0){ %>
+
+<div id="accordion">
+    <% if(s>0){ %>
+    <div class="card">
+        <div style="cursor: pointer" class="card-header alert-success" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h5 class="mb-0">
+                Successful <span class="badge badge-dark"><%= s %></span> <span id="headingOneIcon" style="float: right;" class="glyphicon glyphicon-minus"></span>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4"><strong>Title</strong></div>
+                        <div class="col-3"><strong>Code</strong></div>
+                        <div class="col-3"><strong>Submitted</strong></div>
+                        <div class="col-1"></div>
+                        <div class="col-1"></div>
+                    </div>
+
+                    <% for (var i=0; i < forms.length; i++) { %>
+                    <% if(forms[i].status === "approved"){ %>
+                    <div class="row top-buffer">
+                        <div class="col-4"><%= forms[i].project_title %></div>
+                        <div class="col-3"><%= forms[i].code + "/" + forms[i].seq %></div>
+                        <div class="col-3"><%= moment(forms[i].time).fromNow() %></div>
+                        <div class="col-1">
+                            <form action="view-application" method="get">
+                                <input type="hidden" name="code" value="<%= forms[i].code %>"/>
+                                <input type="hidden" name="seq" value="<%= forms[i].seq %>"/>
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="View"/>
+                            </form>
+                        </div>
+                        <div class="col-1">
+                            <form action="update-application" method="get">
+                                <input type="hidden" name="code" value="<%= forms[i].code %>"/>
+                                <input type="hidden" name="seq" value="<%= forms[i].seq %>"/>
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="Update"/>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row top-buffer">
+    </div>
+    <div class="row top-buffer">
+    </div>
+    <% } if(p>0){ %>
+    <div class="card">
+        <div style="cursor: pointer" class="card-header alert-warning" id="headingTwo" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <h5 class="mb-0">
+                Pending <span class="badge badge-dark"><%= p %></span> <span id="headingTwoIcon" style="float: right;" class="glyphicon glyphicon-minus"></span>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4"><strong>Title</strong></div>
+                        <div class="col-3"><strong>Code</strong></div>
+                        <div class="col-3"><strong>Submitted</strong></div>
+                        <div class="col-1"></div>
+                        <div class="col-1"></div>
+                    </div>
+
+                    <% for (var i=0; i < forms.length; i++) { %>
+                    <% if(forms[i].status === "pending"){ %>
+                    <div class="row top-buffer">
+                        <div class="col-4"><%= forms[i].project_title %></div>
+                        <div class="col-3"><%= forms[i].code + "/" + forms[i].seq %></div>
+                        <div class="col-3"><%= moment(forms[i].time).fromNow() %></div>
+                        <div class="col-1">
+                            <form action="view-application" method="get">
+                                <input type="hidden" name="code" value="<%= forms[i].code %>"/>
+                                <input type="hidden" name="seq" value="<%= forms[i].seq %>"/>
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="View"/>
+                            </form>
+                        </div>
+                        <div class="col-1">
+                            <form action="update-application" method="get">
+                                <input type="hidden" name="code" value="<%= forms[i].code %>"/>
+                                <input type="hidden" name="seq" value="<%= forms[i].seq %>"/>
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="Update"/>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row top-buffer">
+    </div>
+    <div class="row top-buffer">
+    </div>
+    <% } if(r>0){ %>
+    <div class="card">
+        <div style="cursor: pointer" class="card-header alert-danger" id="headingThree" aria-expanded="true" data-toggle="collapse" data-target="#collapseThree" aria-controls="collapseThree">
+            <h5 class="mb-0">
+                Review <span class="badge badge-dark"><%= r %></span> <span id="headingThreeIcon" style="float: right;" class="glyphicon glyphicon-minus"></span>
+            </h5>
+        </div>
+        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4"><strong>Title</strong></div>
+                        <div class="col-3"><strong>Code</strong></div>
+                        <div class="col-3"><strong>Submitted</strong></div>
+                        <div class="col-1"></div>
+                        <div class="col-1"></div>
+                    </div>
+
+                    <% for (var i=0; i < forms.length; i++) { %>
+                    <% if(forms[i].status === "review") { %>
+                    <div class="row top-buffer">
+                        <div class="col-4"><%= forms[i].project_title %></div>
+                        <div class="col-3"><%= forms[i].code + "/" + forms[i].seq %></div>
+                        <div class="col-3"><%= moment(forms[i].time).fromNow() %></div>
+                        <div class="col-1">
+                            <form action="view-application" method="get">
+                                <input type="hidden" name="code" value="<%= forms[i].code %>"/>
+                                <input type="hidden" name="seq" value="<%= forms[i].seq %>"/>
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="View"/>
+                            </form>
+                        </div>
+                        <div class="col-1">
+                            <form action="update-application" method="get">
+                                <input type="hidden" name="code" value="<%= forms[i].code %>"/>
+                                <input type="hidden" name="seq" value="<%= forms[i].seq %>"/>
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="Update"/>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row top-buffer">
+    </div>
+    <div class="row top-buffer">
+    </div>
+    <% } %>
+</div>
+<% } else { %>
+<div class="alert alert-secondary" role="alert">
+    <h4 class="alert-heading">No Applications in Progress</h4>
+    <hr>
+    <p>Looks like you have no active applications at the moment, you can use the menu above to begin!</p>
+    <p>Not sure where to look? Try out FAQs page for advice!</p>
+</div>
+<% } %>
+
+
+<script src="javascripts/dashboard.js"></script>

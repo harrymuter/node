@@ -1,0 +1,22 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+
+<div class="container">
+<div class="jumbotron" style="background-color: #FFFFFF">
+    <div class="jumbotron" id="form">
+        <form action="?document_no=<%= layout.form_layout_no%>" method="post">
+            <%-layout.template %>
+            <div class="row">
+                <div class="col">
+                    <div class="top-buffer-lg"></div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

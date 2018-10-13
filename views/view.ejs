@@ -1,0 +1,184 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+<%
+function timeConverter(UNIX_timestamp){
+var a = new Date(UNIX_timestamp);
+var months = [
+'January',
+'February',
+'March',
+'April',
+'May',
+'June',
+'July',
+'August',
+'September',
+'October',
+'November',
+'December'];
+var year = a.getFullYear();
+var month = months[a.getMonth()];
+var date = a.getDate();
+
+var hour = ''+a.getHours();
+if (hour.length === 1){
+ var hour = '0'+hour;
+}
+var min = ''+a.getMinutes();
+if (min.length === 1){
+var min = '0'+min;
+}
+var time = date + ' ' + month + ' ' + year + ' at ' + hour + ':' + min;
+return time;
+}
+%>
+<div class="container">
+        <div class="jumbotron" style="background-color: #FFFFFF; padding-bottom:0;">
+            <div class="jumbotron" id="form">
+                <form id="view-form">
+                    <%- layout.template %>
+                </form>
+            </div>
+            <strong>Document Layout Version:</strong> <%= layout.form_version_no %><br/>
+            <strong>Uploaded:</strong> <%= timeConverter(form.time) %><br/>
+            <strong>Last Updated:</strong> <%= timeConverter(form.last_update) %>
+            <div class="top-buffer"></div>
+            <% if(form.attachments.length>0){ %>
+            <div class="jumbotron" style="padding:0.4em; margin:0;">
+                <div class="row top-buffer col-12">
+                    <div class="col-12">
+                        <h5>Files</h5>
+                    </div>
+                </div>
+                <% form.attachments.forEach(function(attachment){ %>
+                <div class="row top-buffer col-12">
+                <div class="col-4"><a href="<%= attachment.path %>/<%= attachment.name %>"><%= attachment.name %></a></div>
+                <div class="col-2"><%= attachment.size %> Kb</div>
+                <div class="col-3"><%= moment(attachment.last_upload).fromNow() %></div>
+                </div>
+                <div class="row top-buffer col-12"></div>
+                <% }) %>
+            </div>
+            <% } %>
+            <div class="top-buffer"></div>
+            <form action="/update-application" method="get">
+                <input type="hidden" name="code" value="<%= form.code %>"/>
+                <input type="hidden" name="seq" value="<%= form.seq %>"/>
+                <input type="submit" class="btn btn-primary" value="Update"/>
+                <% if(admin===true){ %>
+                <a class="btn btn-success" href="#" data-toggle="modal" data-target="#markAsApproved">Approve</a>
+                <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#markAsDenied">Deny</a>
+                <% } %>
+            </form>
+        </div>
+        <% if(admin){ %>
+        <div class="jumbotron" style="padding-top:0;margin-top:0;background-color: #FFFFFF;">
+            <form id="submit_comment">
+                <div class="row col-12">
+                    <label class="col-12 col-form-label" for="comment">Comments</label>
+                    <div class="form-group col-12">
+                        <textarea name="comment" id="comment" class="form-control" rows="8" required><%- form.feedback %></textarea>
+                        <input type="hidden" name="code" value="<%= form.code %>"/>
+                        <input type="hidden" name="seq" value="<%= form.seq %>"/>
+                        <div class="top-buffer"></div>
+                        <input type="submit" class="btn btn-secondary" value="Add Comment"/>
+                    </div>
+                </div>
+            </form>
+            <% if(typeof form.feedback_time != "undefined"){ %>
+            The current feedback was given on  <%= timeConverter(form.feedback_time) %>
+            <% } %>
+        </div>
+        <% } else { %>
+    <div class="jumbotron" style="padding-top:0;margin-top:0;background-color: #FFFFFF;">
+        <hr>
+        <h4>Feedback</h4>
+        <div class="top-buffer-lg"></div>
+            <% if(typeof form.feedback_time != "undefined"){ %>
+        <div class="form-group col-12">
+            <div class="alert alert-secondary"><div style="white-space: pre-wrap"><%= form.feedback %></div></div>
+            This feedback was given on  <%= timeConverter(form.feedback_time) %>
+        </div>
+        <hr>
+            <% } %>
+    </div>
+
+    <% } %>
+        <script>
+        $(document).ready(function() {
+
+            $("#project_title").val("<%- form.project_title %>");
+
+            <% for(answer in form.answers){ %>
+                var name = '#'+<%= answer %>;
+                $(name).val("<%- form.answers[answer] %>");
+            <%}%>
+
+            $("#view-form :input").prop("disabled", true);
+
+            });
+
+        </script>
+
+</div>
+
+
+<% if(admin){ %>
+<div class="modal fade" id="markAsApproved" tabindex="-1" role="dialog" aria-labelledby="logout" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="markAsApprovedLabel">Approve Application?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to grant ethics approval?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <form action="update-status" method="post">
+                    <input type="hidden" name="action" value="approved"/>
+                    <input type="hidden" name="seq" value="<%= form.seq %>"/>
+                    <input type="hidden" name="code" value="<%= form.code %>"/>
+                    <input type="submit" class="btn btn-success" value="Approve"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="markAsDenied" tabindex="-1" role="dialog" aria-labelledby="logout" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="markAsDeniedLabel">Deny Application?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to mark this request as needing to be reviewed?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <form action="update-status" method="post">
+                    <input type="hidden" name="action" value="review"/>
+                    <input type="hidden" name="seq" value="<%= form.seq %>"/>
+                    <input type="hidden" name="code" value="<%= form.code %>"/>
+                    <input type="submit" class="btn btn-danger" value="Deny"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="javascripts/add-comment.js"></script>
+<% } %>
+
+
+<script src="javascripts/form-collapse.js"></script>
+
+
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

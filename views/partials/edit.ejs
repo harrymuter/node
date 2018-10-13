@@ -1,0 +1,169 @@
+<div class="top-buffer-lg"></div>
+
+<form class="form-row" id="add_title">
+    <div class="form-group col-8">
+        <label for="form_title_input" class="sr-only">Document Title</label>
+        <input name="form_title" type="text" class="form-control" id="form_title_input" placeholder="Form Title" required>
+    </div>
+    <div class="form-group col-3">
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Title</button>
+    </div>
+    <div class="form-group col-1"></div>
+</form>
+
+<form class="form-row" id="add_subtitle">
+    <div class="form-group col-8">
+        <label for="form_subtitle_input" class="sr-only">Document Subtitle</label>
+        <input name="form_subtitle" type="text" class="form-control" id="form_subtitle_input" placeholder="Form Subtitle" required>
+    </div>
+    <div class="form-group col-3">
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Subtitle</button>
+    </div>
+    <div class="form-group col-1"></div>
+</form>
+
+<form class="form-row">
+    <div class="right-padding" data-toggle="tooltip" data-placement="top" title="Add headings to this form">
+        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Add a Heading</button>
+    </div>
+
+    <div class="right-padding" data-toggle="tooltip" data-placement="top" title="Add inputs to this form">
+        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Add an Input</button>
+    </div>
+
+    <div class="right-padding" data-toggle="tooltip" data-placement="top" title="Add a custom select field">
+        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4">Custom Select Field</button>
+    </div>
+
+    <div class="right-padding" data-toggle="tooltip" data-placement="top" title="Add text to this form">
+        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Add Text</button>
+    </div>
+
+    <div class="right-padding" data-toggle="tooltip" data-placement="top" title="Add a divider to this form">
+        <button id="add_divider" class="btn btn-dark" type="button">Add a Divider</button>
+    </div>
+
+    <!--<button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>-->
+</form>
+
+<div class="row" id="button-toggles">
+    <div class="col-12">
+        <div class="collapse" id="multiCollapseExample1" data-parent="#button-toggles">
+            <div class="card card-body" style="border: 0">
+                <form class="form-row" id="add_heading">
+                    <div class="form-group col-12">
+                        <h6>Heading</h6>
+                    </div>
+                    <div class="form-group col-8">
+                        <label for="form_heading" class="sr-only">Form Name</label>
+                        <input name="form_heading" type="text" class="form-control" id="form_heading" placeholder="Add a Heading" required>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="size" class="sr-only">Size</label>
+                        <select name="size" class="form-control" id="size" required>
+                            <option value="">Size</option>
+                            <option value="h6">Small</option>
+                            <option value="h5">Medium</option>
+                            <option value="h4">Large</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-1">
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="collapse" id="multiCollapseExample2" data-parent="#button-toggles">
+            <div class="card card-body" style="border: 0">
+                <form class="form-row" id="builder">
+                    <div class="form-group col-12">
+                        <h6>Input</h6>
+                    </div>
+                    <div class="form-group col-5">
+                        <label for="question" class="sr-only">Question</label>
+                        <input name="question" type="text" class="form-control" id="question" placeholder="Question" required>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="type" class="sr-only">Type of Response</label>
+                        <select name="type" class="form-control" id="type" required>
+                            <option value="">Type</option>
+                            <option value="text">Text</option>
+                            <option value="boolean">Yes or No</option>
+                            <option value="textarea">Textarea</option>
+                            <option value="number">Number</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="type" class="sr-only">Required?</label>
+                        <select name="required" class="form-control" id="required" required>
+                            <option value="">Required?</option>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-1">
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="collapse" id="multiCollapseExample4" data-parent="#button-toggles">
+            <div class="card card-body" style="border: 0">
+                <form class="form-row" id="select-builder">
+                    <div class="form-group col-12">
+                        <h6>Custom Select</h6>
+                    </div>
+                    <div class="row col-12">
+                        <div class="form-group col-7">
+                            <label for="select_input" class="sr-only">Question</label>
+                            <input name="select_input" type="text" class="form-control" id="select_input" placeholder="Question" required>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="type" class="sr-only">Required?</label>
+                            <select name="required" class="form-control" id="select-required" required>
+                                <option value="">Required?</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row col-12" id="options">
+
+                    </div>
+                    <div class="row col-12">
+                        <div class="col-6" style="padding-top:1em; padding-bottom:1em;">
+                            <div id="add-option" class="btn btn-outline-dark">Add Option</div>
+                            <div id="clear-options" class="btn btn-outline-danger">Clear All</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </form>
+                <div id="custom-select-preview"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="collapse" id="multiCollapseExample3" data-parent="#button-toggles">
+            <div class="card card-body" style="border: 0">
+                <form class="form-row" id="add_text">
+                    <div class="form-group col-12">
+                        <h6>Text</h6>
+                    </div>
+                    <div class="form-group col-11">
+                        <label for="form_text" class="sr-only">Form Name</label>
+                        <textarea name="form_text" type="text" class="form-control" id="form_text" placeholder="Add some Text" rows="6" required></textarea>
+                    </div>
+                    <div class="form-group col-1">
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

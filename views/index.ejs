@@ -1,0 +1,156 @@
+<%- include partials/begin.ejs %>
+<%- include partials/login-navigation.ejs %>
+
+    <a style="float: right; margin: 5px 15px 0 0;" href="reset-password">Forgotten Password?</a>
+    <div class="container">
+
+    <% if(typeof error == 'object' && error){ %>
+        <div class="top-buffer-lg"></div>
+        <div class="alert alert-danger">
+            <div class="alert-heading">
+                Error
+            </div>
+            <hr>
+            <div class="alert-body">
+                <% if(error.error==="username"){ %>
+                    <%= "The username you entered does not exist." %>
+                <% } %>
+                <% if(error.error==="password"){ %>
+                <%= "The password you entered is incorrect." %>
+                <% } %>
+                <% if(error.error==="system"){ %>
+                <%= "System failure. Please report this issue to the system administrator." %>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+
+    <div class="jumbotron" style="background-color: #FFF">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>University of East Anglia</h1>
+                <h2>REC Approval System</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="jumbotron" style="background-color: #e3f2fd">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>First time here? Create an Account.</h2>
+                <div class="row" style="padding-bottom: 1em;"></div>
+            </div>
+        </div>
+
+        <form  class="form-row" action="/create-account" method="post">
+
+            <div class="form-group col-md-6">
+                <label for="fname" class="control-label">First Name*</label>
+                <input name="fname" class="form-control" id="fname" placeholder="First Name" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="lname" class="control-label">Last Name*</label>
+                <input name="lname" class="form-control" id="lname" placeholder="Last Name" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="known_as" class="control-label">Known As</label>
+                <input name="known_as" class="form-control" id="known_as" placeholder="Known As">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="username" class="control-label">UEA Email*</label>
+                <div class="input-group">
+                <input name="username" type="text" class="form-control" id="username" placeholder="abc13xyz" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text"> @uea.ac.uk</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="school" name="school" class="control-label">School*</label>
+                <select class="form-control" id="school" name="school" required>
+                    <option>School</option>
+                    <option value="CMP">CMP</option>
+                    <option value="MAT">MAT</option>
+                    <option value="ENV">ENV</option>
+                    <option value="CHE">CHE</option>
+                    <option value="BIO">BIO</option>
+                    <option value="AMA">AMA</option>
+                    <option value="LAW">LAW</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="type_of_user" class="control-label">Type of User*</label>
+                <select class="form-control" id="type_of_user" name="type_of_user" required>
+                    <option value="" disabled selected>Type of User</option>
+                    <option value="UG">UG</option>
+                    <option value="PGT">PGT</option>
+                    <option value="PGR">PGR</option>
+                    <option value="SRA">(S)RA</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="supervisor" class="control-label">Supervisor</label>
+                <select class="form-control" id="supervisor" name="supervisor">
+                    <option value="" disabled selected>Supervisor</option>
+                    <option value="ds">Dr Dan Smith</option>
+                    <option value="pm">Dr Pam Mayhew</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+            </div>
+
+
+            <div class="form-group col-md-6">
+                <label for="memorable_word" class="control-label">Memorable Word*</label>
+                <select class="form-control" id="memorable_word" name="memorable_word" required>
+                    <option value="" disabled selected>Memorable Word*</option>
+                    <option value="Your oldest sibling's middle name">Your oldest sibling's middle name</option>
+                    <option value="Name of your first pet">Name of your first pet</option>
+                    <option value="Last name of your favourite teacher at school">Last name of your favourite school teacher</option>
+                </select>
+            </div>
+
+
+            <div class="form-group col-md-6">
+                <label for="memorable_word_answer" class="control-label">Memorable Word Answer (lowercase)*</label>
+                <input type="password" name="memorable_word_answer" class="form-control" id="memorable_word_answer" placeholder="Memorable Word Answer (lowercase)" required>
+            </div>
+
+
+            <div class="form-group col-md-6">
+                <label for="password" class="control-label">Password*</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="confirm_password" class="control-label">Confirm Password*</label>
+                <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" required>
+            </div>
+
+            <div class="form-group col-md-12">
+                <p><strong>* Required field</strong></p>
+            </div>
+
+            <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Create</button>
+            </div>
+        </form>
+
+        </div>
+    </div>
+
+    </div>
+<%- include partials/end.ejs %>
+

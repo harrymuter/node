@@ -1,0 +1,33 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+
+
+<div class="container">
+
+    <div class="jumbotron" style="background-color: #FFFFFF">
+        <% if(typeof object == 'object' && object){ %>
+        <div class="row">
+            <% var no = 0; object.forEach(function(details){ no++;%>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= details.name %></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Version no: <%= details.form_version_no %></h6>
+                        <a href="update-form?document_no=<%= details.form_layout_no%>&version_no=<%= details.form_version_no%>" class="btn btn-primary">Update Form</a>
+                    </div>
+                </div>
+            </div>
+            <% if(no%2===0){ %>
+            <div class="col-12 top-buffer-lg"></div>
+            <% } %>
+            <% }) %>
+        </div>
+        <% } else { %>
+        <h3>There are no forms yet.</h3>
+        <p><% if(admin==true){ %> Click <a href="/create-form">here</a> to create one.<% } %></p>
+        <% } %>
+    </div>
+</div>
+
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

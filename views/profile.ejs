@@ -1,0 +1,149 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+
+<div class="container">
+
+    <div class="jumbotron" style="background-color: #FFFFFF">
+
+        <div class="row spaced">
+            <h2>Your Profile</h2>
+        </div>
+
+    <form class="form-inline" action="/update-first-name" method="post">
+        <div class="form-group col-lg-12 mb-4">
+            <label for="fname" class="control-label col-lg-2 mb-2 mr-lg-5">First Name*</label>
+            <input id="fname" class="form-control col-lg-3 mb-2 mr-lg-5" type="text" name="fname" placeholder="First Name*" value="<%= fname %>" aria-label="First Name*" required>
+            <div class="col-lg-3 mb-2 mr-lg-5"></div>
+            <button class="btn btn-outline-primary" type="submit">Update</button>
+        </div>
+    </form>
+    <% if (success.fname){ %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Updated!</strong>
+        <hr>Your first name was updated.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
+
+
+    <form class="form-inline" action="/update-known-as" method="post">
+        <div class="form-group col-lg-12 mb-4">
+            <label for="known_as" class="control-label col-lg-2 mb-2 mr-lg-5">Known As</label>
+            <input id="known_as" class="form-control col-lg-3 mb-2 mr-lg-5"type="text" name="known_as" placeholder="Known As" <% if(ka){ %> value="<%= ka %>" <% } %> aria-label="Known As">
+            <div class="col-lg-3 mb-2 mr-lg-5"></div>
+            <button class="btn btn-outline-primary" type="submit">Update</button>
+        </div>
+    </form>
+    <% if (success.ka){ %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Updated!</strong>
+        <hr>Your preferred name was updated.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
+
+
+    <form class="form-inline" action="/update-last-name" method="post">
+        <div class="form-group col-lg-12 mb-4">
+                <label for="lname" class="control-label col-lg-2 mb-2 mr-lg-5">Last Name*</label>
+                <input id="lname" class="form-control col-lg-3 mb-2 mr-lg-5" type="text" name="lname" placeholder="Last Name*" value="<%= lname %>" aria-label="Last Name*" required>
+                <div class="col-lg-3 mb-2 mr-lg-5"></div>
+                <button class="btn btn-outline-primary" type="submit">Update</button>
+            </div>
+    </form>
+    <% if (success.lname){ %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Updated!</strong>
+        <hr>Your last name was updated.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
+
+    <form class="form-inline" action="/update-password" method="post">
+        <div class="form-group col-lg-12 mb-4">
+            <label for="password" class="control-label col-lg-2 mb-2 mr-lg-5">Password*</label>
+            <input id="password" class="form-control col-lg-3 mb-2 mr-lg-5" type="password" name="password" placeholder="Password*" aria-label="Password" required>
+            <input class="form-control col-lg-3 mb-2 mr-lg-5" type="password" name="confirm_password" placeholder="Confirm Password*" aria-label="Confirm Password" required>
+            <button class="btn btn-outline-primary" type="submit">Update</button>
+        </div>
+    </form>
+    <% if (success.password){ %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Updated!</strong>
+        <hr>Your password was updated.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
+    <% if (errors.password){ %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>These do not match!</strong>
+        <hr>The password confirmation was not the same as you password input, please ensure they match.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
+
+    <form class="form-inline" action="/update-user-type" method="post">
+        <div class="form-group col-lg-12 mb-4">
+            <label for="type_of_user" class="control-label col-lg-2 mb-2 mr-lg-5">Type of User*</label>
+            <select class="form-control col-lg-3 mb-2 mr-lg-5" id="type_of_user" name="type_of_user" required>
+                <option value="" disabled selected><%= type_of_user %></option>
+                <option value="UG">UG</option>
+                <option value="PGT">PGT</option>
+                <option value="PGR">PGR</option>
+                <option value="SRA">(S)RA</option>
+                <option value="Faculty">Faculty</option>
+                <option value="Other">Other</option>
+            </select>
+            <div class="col-lg-3 mb-2 mr-lg-5"></div>
+            <button class="btn btn-outline-primary" type="submit">Update</button>
+        </div>
+    </form>
+        <% type_of_user %>
+    <% if (success.type_of_user){ %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Updated!</strong>
+        <hr>Your user status was updated.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
+
+    <form class="form-inline" action="/update-memorable-word" method="post">
+        <div class="form-group col-lg-12 mb-4">
+            <label for="memorable_word" class="control-label col-lg-2 mb-2 mr-lg-5">Memorable Word*</label>
+            <select class="form-control col-lg-3 mb-2 mr-lg-5" id="memorable_word" name="memorable_word" required>
+                <option value="" disabled selected><%= memorable_word %></option>
+                <option value="Your oldest sibling's middle name">Your oldest sibling's middle name</option>
+                <option value="Name of your first pet">Name of your first pet</option>
+                <option value="Last name of your favourite teacher at school">Last name of your favourite school teacher</option>
+            </select>
+            <input id="memorable_word_answer" class="form-control col-lg-3 mb-2 mr-lg-5" type="password" name="memorable_word_answer" placeholder="Memorable Word Answer*" aria-label="Memorable Word Answer" required>
+            <button class="btn btn-outline-primary" type="submit">Update</button>
+        </div>
+    </form>
+    <% if (success.memorable_word){ %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Updated!</strong>
+        <hr>Your memorable word was updated.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
+    </div>
+
+</div>
+
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

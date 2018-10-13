@@ -1,0 +1,123 @@
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All Results</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-refine-tab" data-toggle="pill" href="#pills-refine" role="tab" aria-controls="pills-refine" aria-selected="false">Filter Search</a>
+    </li>
+
+</ul>
+<div class="top-buffer-lg"></div>
+
+
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+
+        <% if(forms.length !== 0) { %>
+        <div class="row col-12">
+            <div class="col-3"><strong>Name</strong></div>
+            <div class="col-3"><strong>Title</strong></div>
+            <div class="col-3"><strong>Submitted</strong></div>
+            <div class="col-3"></div>
+        </div>
+        <div class="top-buffer-lg"></div>
+            <% forms.forEach(function(form) { %>
+        <div class="row col-12 alert alert-<% if(form.status ==='approved'){%>success<%} else if(form.status ==='pending'){%>warning<%} else {%>danger<%}%>">
+            <div class="col-3"><%= form.first_name + ' ' + form.last_name %></div>
+                <div class="col-3"><%= form.project_title %></div>
+                <div class="col-3"><%= moment(form.time).fromNow() %></div>
+            <div class="col-3">
+                <form action="view-application" method="get">
+                    <input type="hidden" name="code" value="<%= form.code %>"/>
+                    <input type="hidden" name="seq" value="<%= form.seq %>"/>
+                    <input type="submit" class="btn btn-sm btn-outline-dark" value="View"/>
+                </form>
+            </div>
+        </div>
+        <div class="top-buffer-lg"></div>
+        <% }); } %>
+
+    </div>
+    <div class="tab-pane fade" id="pills-refine" role="tabpanel" aria-labelledby="pills-refine-tab">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand">Application Search</a>
+            <form id="search_forms" class="form-inline">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="search_criteria" id="lname" value="lname" checked="checked">
+                    <label class="form-check-label" for="lname">Last Name</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="search_criteria" id="username" value="username">
+                    <label class="form-check-label" for="username">Username</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="search_criteria" id="application_id" value="application_id">
+                    <label class="form-check-label" for="application_id">Application ID</label>
+                </div>
+                <input id="search" name="text" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success btn-sm mr-1" type="submit">Search</button>
+                <div class="btn btn-outline-danger btn-sm" id="clear-search">Clear</div>
+            </form>
+        </nav>
+        <div id="response"></div>
+
+    </div>
+</div>
+
+<script>
+    $("#clear-search").on("click", function(){
+        $("#search").val("");
+        $("#response").html("");
+    });
+
+    $("#search_forms").submit(function(e) {
+        var form = $(this);
+        $.ajax({
+            type: "POST",
+            url: 'admin-action',
+            data: form.serialize(),
+            success: function(data)
+            {
+                var html = '<div class="jumbotron" style="background-color: #FFFFFF">';
+                if(data.length !== 0) {
+                    html += '<div class="row col-12">';
+                    html += '<div class="col-3"><strong>Name</strong></div><div class="col-3"><strong>Title</strong></div><div class="col-3"><strong>Submitted</strong></div><div class="col-3"></div>'+
+                        '</div>'+
+                        '<div class="top-buffer"></div>'+
+                        '<div class="top-buffer-lg"></div>';
+
+                    data.forEach(function(form) {
+                        var color;
+                        if(form.status ==='approved'){
+                            color = 'success'
+                        } else if(form.status ==='pending'){
+                            color = 'warning'
+                        } else {
+                            color = 'danger'
+                        };
+                        html += '<div class="row col-12 alert alert-'+color+'">';
+                            html += '<div class="col-3">' + form.first_name + ' ' + form.last_name + '</div><div class="col-3">' + form.project_title + '</div><div class="col-3">' + moment(form.time).fromNow() + '</div>' +
+                                '<div class="col-3">'+
+                                '<form action="view-application" method="get"> ' +
+                                '<input type="hidden" name="code" value="'+form.code+'"/> ' +
+                                '<input type="hidden" name="seq" value="'+form.seq+'"/> ' +
+                                '<input type="submit" class="btn btn-sm btn-outline-dark" value="View"/> ' +
+                                '</form>'+
+                                '</div>'+
+                                '<div class="top-buffer-lg"></div>';
+                        html += '</div>';
+                        });
+                } else {
+                    html += 'No Results';
+                }
+
+                html += '</div>';
+                html += '</div>';
+
+                $('#response').html(html);
+            }
+        });
+        e.preventDefault();
+    });
+</script>

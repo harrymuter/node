@@ -1,0 +1,48 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+<div class="container">
+    <div class="jumbotron" style="background-color: #FFF; margin: 0; padding-bottom: 0">
+
+        <h3>Update: <%= form_layout.name %></h3>
+
+        <%- include partials/edit.ejs %>
+
+    </div>
+
+    <div class="jumbotron" style="background-color: #FFFFFF;">
+        <h5>Preview:</h5>
+        <p class="row col-12">
+            <input class="form-check-input" type="checkbox" id="toggle-controls">
+            <label class="form-check-label" for="toggle-controls">
+                Toggle Controls
+            </label>
+        </p>
+        <hr>
+        <div class="jumbotron">
+            <form class="form-row" id="newForm">
+                <%- form_layout.raw_html %>
+            </form>
+        </div>
+
+        <form class="form-row" id="submit_layout">
+            <div class="form-group col-2">
+                <button type="submit" class="btn btn-success">Update Form</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+</div>
+
+<script>
+
+    var form_name = "";
+    var array_of_questions = [];
+
+</script>
+<script src="javascripts/create-form.js"></script>
+
+
+
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>
