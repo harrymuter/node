@@ -70,7 +70,7 @@ var updateAForm = require('./routes/update-a-form');
 
 var app = express();
 app.locals.moment = moment;
-app.set('views', __dirname +'/views');
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 app.use(cookieSession({
     name: 'session',
