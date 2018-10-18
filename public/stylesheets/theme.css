@@ -243,3 +243,38 @@ input[type="radio"]{
 .right-padding {
     padding-right: 1em;
 }
+
+.h1-alt {
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.h2-alt {
+    font-size: 2.1rem;
+    font-weight: 500;
+}
+
+.h3-alt {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.h4-alt {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.h4-alt {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.h5-alt {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.h6-alt {
+    font-size: 1.1rem;
+    font-weight: 500;
+}

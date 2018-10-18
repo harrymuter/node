@@ -9,7 +9,11 @@ router.get('/', function (req, res) {
     if (req.session.user) {
         var admin = req.session.user.admin;
         const layout_no = req.query.document_no;
-        FormLayout.findOne({form_layout_no:layout_no}, function (err, layout) {
+        const version_no = req.query.version_no;
+        req.session.layout_no = layout_no;
+        req.session.version_no = version_no;
+
+        FormLayout.findOne({form_layout_no: layout_no, form_version_no: version_no}, function (err, layout) {
             if(err){
                 console.log(err);
                 res.redirect('/dashboard');
@@ -34,8 +38,11 @@ router.post('/', function (req, res) {
         const year = username.slice(3, -3);
         const type_of_user = req.session.user.type_of_user;
         const code = req.session.user.school+"/"+year+"/"+type_of_user;
-        const layout_no = req.query.document_no;
-        const version_no = req.query.version_no;
+
+        const layout_no = req.session.layout_no;
+        const version_no = req.session.version_no;
+        req.session.layout_no = null;
+        req.session.version_no = null;
 
         Form.countDocuments({code:code}, function (err, number) {
 
@@ -48,7 +55,7 @@ router.post('/', function (req, res) {
             const school = req.session.user.school;
             const code = req.session.user.school+"/"+year+"/"+type_of_user;
             const project_title = req.body.project_title;
-            const application_type = req.body.application_type;
+            const form_type_display = req.body.form_type_display;
             var administrator;
 
             if (req.session.user.school==="CMP"&&type_of_user==="PGT"){
@@ -62,22 +69,64 @@ router.post('/', function (req, res) {
                 }
             }
 
-            const form_code = { code: code, seq: ''+seq };
-            req.session.current_query = form_code;
+            console.log(form_type_display);
 
+            function days(days){
+                return (days*(24*60*60*1000));
+            }
+            // Get today's date
+            var evaluation_date = Date.now();
 
-            FormLayout.findOne({form_layout_no: layout_no}, function (err, layout) {
+            // SCHOOL EFFECT
+            if (school==="CMP"){
+                evaluation_date += days(3)
+            } else if(school==="MAT"){
+                evaluation_date += days(4)
+            } else {
+                evaluation_date += days(2)
+            }
+
+            // APPLICANT EFFECT
+            if (type_of_user==="UG"){
+                evaluation_date += days(2)
+            } else if(type_of_user==="PGT"){
+                evaluation_date += days(4)
+            }  else if(type_of_user==="PGR"){
+                evaluation_date += days(7)
+            }  else if(type_of_user==="(S)RA"){
+                evaluation_date += days(6)
+            }  else if(type_of_user==="Faculty"){
+                evaluation_date += days(7)
+            } else {
+                evaluation_date += days(15)
+            }
+
+            // TYPE EFFECT
+            if(form_type_display==="individual"){
+                evaluation_date += days(1)
+            } else {
+                evaluation_date += days(5)
+            }
+
+            console.log(evaluation_date);
+
+            FormLayout.findOne({form_layout_no: layout_no, form_version_no: version_no}, function (err, layout) {
+                console.log(layout);
                 var answers = '{';
-                layout.questions.forEach(function (a) {
-                    var str = a.toString();
-                    if(req.body[str]!==""){
-                        answers += '"'+str+'": '+' "'+req.body[str]+'", ';
-                    }
-                });
-                answers = answers.substring(0, answers.length - 2);
-                answers += '}';
+                if (layout.questions.length > 0) {
+                    layout.questions.forEach(function (a) {
+                        var str = a.toString();
+                        if (req.body[str] !== "") {
+                            answers += '"' + str + '": ' + ' "' + req.body[str] + '", ';
+                        }
+                    });
+                    answers = answers.substring(0, answers.length - 2);
+                    answers += '}';
 
-                answers = JSON.parse(answers);
+                    answers = JSON.parse(answers);
+                } else {
+                    answers = null;
+                }
 
                 var newForm = new Form({
                     first_name: fname,
@@ -85,7 +134,7 @@ router.post('/', function (req, res) {
                     username: username,
                     type_of_user: type_of_user,
                     administrator: administrator,
-                    application_type: application_type,
+                    form_type_display: form_type_display,
                     code: code,
                     seq: seq,
                     school: school,
@@ -95,7 +144,8 @@ router.post('/', function (req, res) {
                     form_layout_no: layout_no,
                     form_version_no: version_no,
                     answers: answers,
-                    project_title: project_title
+                    project_title: project_title,
+                    evaluation_date: evaluation_date,
                 });
 
                 Form.createForm(newForm, function(err, user){

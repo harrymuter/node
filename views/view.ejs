@@ -47,7 +47,7 @@ return time;
             <div class="jumbotron" style="padding:0.4em; margin:0;">
                 <div class="row top-buffer col-12">
                     <div class="col-12">
-                        <h5>Files</h5>
+                        <div class="h5-alt">Files</div>
                     </div>
                 </div>
                 <% form.attachments.forEach(function(attachment){ %>
@@ -91,10 +91,10 @@ return time;
         </div>
         <% } else { %>
     <div class="jumbotron" style="padding-top:0;margin-top:0;background-color: #FFFFFF;">
+            <% if(typeof form.feedback_time != "undefined"){ %>
         <hr>
         <h4>Feedback</h4>
         <div class="top-buffer-lg"></div>
-            <% if(typeof form.feedback_time != "undefined"){ %>
         <div class="form-group col-12">
             <div class="alert alert-secondary"><div style="white-space: pre-wrap"><%= form.feedback %></div></div>
             This feedback was given on  <%= timeConverter(form.feedback_time) %>

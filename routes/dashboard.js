@@ -13,6 +13,10 @@ router.get('/', function (req, res) {
         var admin = req.session.user.admin;
         var visited = req.session.user.visited;
         var school = req.session.user.school;
+        var switch_role = false;
+        if(req.session.user.switch) {
+            switch_role = req.session.user.switch;
+        }
 
         if (admin) {
             Form.find({school: school}, function (err, forms) {
@@ -28,6 +32,7 @@ router.get('/', function (req, res) {
                         fname: fname,
                         username: username,
                         ka: ka,
+                        switch_role: switch_role,
                         admin: admin,
                         forms: forms
                     })
@@ -47,6 +52,7 @@ router.get('/', function (req, res) {
                         fname: fname,
                         username: username,
                         ka: ka,
+                        switch_role:switch_role,
                         admin: admin,
                         forms: forms
                     })

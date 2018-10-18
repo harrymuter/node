@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
-mongoose.connect('mongodb://178.62.8.45:27017/nodeauth', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/nodeauth', { useNewUrlParser: true });
 
     const UserSchema = mongoose.Schema({
         username: String,

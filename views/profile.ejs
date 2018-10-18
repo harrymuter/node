@@ -5,8 +5,10 @@
 
     <div class="jumbotron" style="background-color: #FFFFFF">
 
-        <div class="row spaced">
-            <h2>Your Profile</h2>
+        <div class="col-md-12">
+            <div class="row spaced">
+                <div class="h3-alt">Your Profile</div>
+            </div>
         </div>
 
     <form class="form-inline" action="/update-first-name" method="post">
@@ -69,7 +71,8 @@
         <div class="form-group col-lg-12 mb-4">
             <label for="password" class="control-label col-lg-2 mb-2 mr-lg-5">Password*</label>
             <input id="password" class="form-control col-lg-3 mb-2 mr-lg-5" type="password" name="password" placeholder="Password*" aria-label="Password" required>
-            <input class="form-control col-lg-3 mb-2 mr-lg-5" type="password" name="confirm_password" placeholder="Confirm Password*" aria-label="Confirm Password" required>
+            <label for="confirm_password" class="sr-only">Confirm Password*</label>
+            <input id="confirm_password" class="form-control col-lg-3 mb-2 mr-lg-5" type="password" name="confirm_password" placeholder="Confirm Password*" aria-label="Confirm Password" required>
             <button class="btn btn-outline-primary" type="submit">Update</button>
         </div>
     </form>
@@ -128,6 +131,7 @@
                 <option value="Name of your first pet">Name of your first pet</option>
                 <option value="Last name of your favourite teacher at school">Last name of your favourite school teacher</option>
             </select>
+            <label for="memorable_word_answer" class="sr-only">Memorable Word Answer*</label>
             <input id="memorable_word_answer" class="form-control col-lg-3 mb-2 mr-lg-5" type="password" name="memorable_word_answer" placeholder="Memorable Word Answer*" aria-label="Memorable Word Answer" required>
             <button class="btn btn-outline-primary" type="submit">Update</button>
         </div>

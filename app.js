@@ -68,6 +68,7 @@ var updateForm = require('./routes/update-form');
 var newApplication = require('./routes/new-application');
 var viewApplication = require('./routes/view-application');
 var updateAForm = require('./routes/update-a-form');
+var FAQ = require('./routes/faq');
 
 var app = express();
 app.locals.moment = moment;
@@ -116,6 +117,7 @@ app.use('/new-application', newApplication);
 app.use('/view-application', viewApplication);
 app.use('/update-application', updateApplication);
 app.use('/update-a-form', updateAForm);
+app.use('/FAQs', FAQ);
 
 
 //

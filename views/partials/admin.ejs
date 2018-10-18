@@ -43,18 +43,26 @@
         <nav class="navbar navbar-light bg-light justify-content-between">
             <a class="navbar-brand">Application Search</a>
             <form id="search_forms" class="form-inline">
+                <legend class="sr-only"></legend>
+                <fieldset>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="search_criteria" id="lname" value="lname" checked="checked">
                     <label class="form-check-label" for="lname">Last Name</label>
                 </div>
+                </fieldset>
+                <fieldset>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="search_criteria" id="username" value="username">
                     <label class="form-check-label" for="username">Username</label>
                 </div>
+                </fieldset>
+                <fieldset>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="search_criteria" id="application_id" value="application_id">
                     <label class="form-check-label" for="application_id">Application ID</label>
                 </div>
+                </fieldset>
+                <label class="sr-only" for="search">Search Bar</label>
                 <input id="search" name="text" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success btn-sm mr-1" type="submit">Search</button>
                 <div class="btn btn-outline-danger btn-sm" id="clear-search">Clear</div>

@@ -1,6 +1,6 @@
 
 <div class="col-md-12" style="margin-bottom: 2em;">
-    <h2>Hi, <% if (ka) { %> <%= ka %> <% } else{ %> <%= fname %> <% } %></h2>
+    <div class="h3-alt">Hi <% if (ka) { %> <%= ka %> <% } else{ %> <%= fname %> <% } %>,</div>
 </div>
 
 <% if(visited==false){ %>
@@ -35,9 +35,9 @@ if(forms.length > 0){ %>
     <% if(s>0){ %>
     <div class="card">
         <div style="cursor: pointer" class="card-header alert-success" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <h5 class="mb-0">
+            <div class="h5-alt mb-0">
                 Successful <span class="badge badge-dark"><%= s %></span> <span id="headingOneIcon" style="float: right;" class="glyphicon glyphicon-minus"></span>
-            </h5>
+            </div>
         </div>
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
@@ -85,9 +85,9 @@ if(forms.length > 0){ %>
     <% } if(p>0){ %>
     <div class="card">
         <div style="cursor: pointer" class="card-header alert-warning" id="headingTwo" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <h5 class="mb-0">
+            <div class="h5-alt mb-0">
                 Pending <span class="badge badge-dark"><%= p %></span> <span id="headingTwoIcon" style="float: right;" class="glyphicon glyphicon-minus"></span>
-            </h5>
+            </div>
         </div>
         <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
             <div class="card-body">
@@ -134,9 +134,9 @@ if(forms.length > 0){ %>
     <% } if(r>0){ %>
     <div class="card">
         <div style="cursor: pointer" class="card-header alert-danger" id="headingThree" aria-expanded="true" data-toggle="collapse" data-target="#collapseThree" aria-controls="collapseThree">
-            <h5 class="mb-0">
+            <div class="h5-alt mb-0">
                 Review <span class="badge badge-dark"><%= r %></span> <span id="headingThreeIcon" style="float: right;" class="glyphicon glyphicon-minus"></span>
-            </h5>
+            </div>
         </div>
         <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
             <div class="card-body">

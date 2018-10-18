@@ -2,7 +2,7 @@
 <%- include partials/navigation.ejs %>
 <div class="container">
 <div class="jumbotron" style="background-color: #FFF">
-    <% if(admin){ %>
+    <% if(admin==true && switch_role==false){ %>
         <%- include partials/admin.ejs %>
     <% } else { %>
         <%- include partials/user-dash.ejs %>

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://178.62.8.45:27017/nodeauth', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/nodeauth', { useNewUrlParser: true });
+//mongodb://:Greenways4@178.62.98.86:27017/nodeauth
 
 
     const FormSchema = mongoose.Schema({
@@ -28,6 +29,7 @@ mongoose.connect('mongodb://178.62.8.45:27017/nodeauth', { useNewUrlParser: true
         answers: Object,
         feedback: String,
         feedback_time: Number,
+        evaluation_date: Number,
         attachments: [{
             name: String,
             file_type: String,

@@ -39,7 +39,7 @@ $(document).ready(function(){
         var size = form.size;
         newform.append('<div class="row col-12 '+stamp+'" data-identifier="' + stamp + '">' +
             '<div class="row col-12 top-buffer-lg"></div>' +
-            '<div class="row col-12"><'+size+'>'+heading+'</'+size+'>'+'</div>' +
+            '<div class="row col-12"><div class="'+size+'-alt">'+heading+'</div>'+'</div>' +
             '<div class="row col-12 top-buffer"></div>' +
             '<div class="col-1 move" data-identifier="' + stamp + '"  data-direction="up"><span class="alert alert-warning glyphicon glyphicon-circle-arrow-up"></span></div>' +
             '<div class="col-10 delete" data-identifier="' + stamp + '"><span class="col-12 alert alert-danger glyphicon glyphicon-remove"></span></div>' +
@@ -165,6 +165,8 @@ $(document).ready(function(){
         e.preventDefault();
         var form = $('#newForm');
         var form_type = $('#form_type').val();
+
+        $('#form_type_display').val(form_type);
 
         var html_raw = form.html();
         html_raw = html_raw.replace(/(\r\n\t|\n|\r\t)/gm,"");
