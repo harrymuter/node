@@ -67,10 +67,11 @@
         <% switch (page_name) {
         case 'dashboard': %>
         <% if(admin){ %>
-        <div class="btn btn-outline-secondary my-2 my-sm-0">
-        <% if(typeof switch_role != "undefined"){ if(switch_role === false){ %>
-             Applicant View
-        <% } else if(switch_role === true) { %>
+        <div id="toggleView" class="btn btn-outline-secondary my-2 my-sm-0">
+        <% if(typeof switch_role != "undefined"){ %>
+            <% if(switch_role === false){ %>
+                Applicant View
+            <% } else if(switch_role === true) { %>
             Admin View
         <% }} %>
         </div>

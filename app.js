@@ -51,6 +51,7 @@ var dash = require('./routes/dashboard');
 var forms = require('./routes/display-forms');
 var restricted = require('./routes/restricted');
 var updateStatus = require('./routes/update-status');
+var toggleView = require('./routes/toggle-view');
 var updateApplication = require('./routes/update-application');
 var resetPassword = require('./routes/reset-password');
 var updatePassword = require('./routes/update-password');
@@ -118,6 +119,7 @@ app.use('/view-application', viewApplication);
 app.use('/update-application', updateApplication);
 app.use('/update-a-form', updateAForm);
 app.use('/FAQs', FAQ);
+app.use('/toggle-view', toggleView);
 
 
 //

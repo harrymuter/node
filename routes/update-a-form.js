@@ -24,13 +24,44 @@ router.get('/', function (req, res) {
                     res.render('update-a-form', {page_name: 'update-form', title: 'Update a Form', admin: admin})
                 } else {
 
+                    function capitalizeFirstLetter(string) {
+                        return string.charAt(0).toUpperCase() + string.slice(1);
+                    }
                     var object = '[';
                     form.forEach(function(data) {
-                        object +=
-                            '{"name": "' + data.name +
-                            '", "form_layout_no": '+data.form_layout_no +
-                            ', "form_version_no": '+data.form_version_no +
-                            ' },';
+                        if (data.form_type!==undefined) {
+                            if(data.disabled!==undefined) {
+                                object +=
+                                    '{"name": "' + data.name +
+                                    '", "form_layout_no": ' + data.form_layout_no +
+                                    ', "form_version_no": ' + data.form_version_no +
+                                    ', "disabled": ' + data.disabled +
+                                    ', "type": "' + capitalizeFirstLetter(data.form_type) +
+                                    '" },';
+                            } else{
+                                object +=
+                                    '{"name": "' + data.name +
+                                    '", "form_layout_no": ' + data.form_layout_no +
+                                    ', "form_version_no": ' + data.form_version_no +
+                                    ', "type": "' + capitalizeFirstLetter(data.form_type) +
+                                    '" },';
+                            }
+                        } else {
+                            if(data.disabled!==undefined) {
+                                object +=
+                                    '{"name": "' + data.name +
+                                    '", "form_layout_no": ' + data.form_layout_no +
+                                    ', "disabled": ' + data.disabled +
+                                    ', "form_version_no": ' + data.form_version_no +
+                                    ' },';
+                            } else {
+                                object +=
+                                    '{"name": "' + data.name +
+                                    '", "form_layout_no": ' + data.form_layout_no +
+                                    ', "form_version_no": ' + data.form_version_no +
+                                    ' },';
+                            }
+                        }
                     });
                     object = object.slice(0, -1);
                     object += ']';

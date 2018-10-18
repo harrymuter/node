@@ -41,7 +41,8 @@ router.post('/', function (req, res) {
             creator: creator,
             questions: questions,
             form_layout_no: req.session.document,
-            version: req.session.version+1
+            version: req.session.version+1,
+            disabled: false
         };
         req.session.document = null;
         req.session.version = null;

@@ -6,6 +6,18 @@ $(function(){
         });
     });
 });
+$(function() {
+    $('#toggleView').click(function(){
+        $.ajax({
+            url: 'toggle-view',
+            type: 'POST',
+            success: function() {
+                location.reload();
+            }
+        });
+    });
+});
+
 
 $('#headingOne').on('click',function() {
     var icon = $('#headingOneIcon');

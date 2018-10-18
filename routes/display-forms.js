@@ -19,7 +19,7 @@ router.get('/', function (req, res) {
             });
 
             if (req.query.type === "module") {
-                FormLayout.find({$or: search_criteria, form_type:'module'}, function (err, form) {
+                FormLayout.find({$or: search_criteria, form_type:'module', disabled: { $ne: true }}, function (err, form) {
                     if (err) {
                         var object = JSON.parse('[]');
                         res.render('forms', {page_name: 'forms-module', title: 'Module Forms', admin: admin, object})
@@ -46,7 +46,7 @@ router.get('/', function (req, res) {
                     }
                 });
             } else if (req.query.type === "individual")  {
-                FormLayout.find({$or: search_criteria, form_type:'individual'}, function (err, form) {
+                FormLayout.find({$or: search_criteria, form_type:'individual', disabled: { $ne: true }}, function (err, form) {
                     if (err) {
                         var object = JSON.parse('[]');
                         res.render('forms', {page_name: 'forms-individual', title: 'Individual Forms', admin: admin, object})

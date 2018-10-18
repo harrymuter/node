@@ -9,11 +9,15 @@
         <div class="row">
             <% var no = 0; object.forEach(function(details){ no++;%>
             <div class="col-sm-6">
-                <div class="card">
+                <div class="card<% if(details.disabled===true){ %> dis<% } %>">
                     <div class="card-body">
-                        <h5 class="card-title"><%= details.name %></h5>
+                        <div class="card-title h5-alt">Title: <%= details.name %></div>
+                        <div class="card-subtitle h6-alt">Type: <%= details.type %></div>
+                        <div class="col-12 top-buffer-lg"></div>
                         <h6 class="card-subtitle mb-2 text-muted">Version no: <%= details.form_version_no %></h6>
-                        <a href="update-form?document_no=<%= details.form_layout_no%>&version_no=<%= details.form_version_no%>" class="btn btn-primary">Update Form</a>
+                        <a href="update-form?document_no=<%= details.form_layout_no%>&version_no=<%= details.form_version_no%>" class="btn btn-primary btn-block">Update Form</a>
+                        <div class="top-buffer"></div>
+                        <div class="toggle-enable btn btn-secondary btn-block" data-status="<%=details.disabled%>" data-layout="<%= details.form_layout_no %>"><% if(details.disabled===true){ %>Enable<% }else{ %>Disable<% } %></div>
                     </div>
                 </div>
             </div>
@@ -27,6 +31,22 @@
         <p><% if(admin==true){ %> Click <a href="/create-form">here</a> to create one.<% } %></p>
         <% } %>
     </div>
+    <script>
+        $(function() {
+            $(".toggle-enable").click(function () {
+                const layout = $(this).data("layout");
+                const status = $(this).data("status");
+                $.ajax({
+                    url: 'toggle-disabled',
+                    data: {layout:layout,status:''+status},
+                    type: 'POST',
+                    success: function() {
+                        location.reload();
+                    }
+                });
+            })
+        });
+    </script>
 </div>
 
 <%- include partials/confirm-logout.ejs %>

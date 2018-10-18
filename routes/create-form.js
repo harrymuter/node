@@ -29,6 +29,7 @@ router.post('/', function (req, res) {
                 raw_html: raw_html,
                 creator: creator,
                 questions: questions,
+                disabled: false,
                 form_layout_no: req.session.document,
                 form_version_no: parseInt(req.session.version) + 1
             };
@@ -53,6 +54,7 @@ router.post('/', function (req, res) {
                     creator: creator,
                     questions: questions,
                     form_layout_no: number,
+                    disabled: false,
                     form_version_no: 1
                 };
                 var newFormLayout = new FormLayout(form_layout);

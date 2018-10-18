@@ -17,6 +17,7 @@ mongoose.connect('mongodb://localhost:27017/nodeauth', { useNewUrlParser: true }
         raw_html: String,
         creator: String,
         created: Date,
+        disabled: Boolean
     });
 
 const FormLayout = module.exports = mongoose.model('FormLayout', FormLayoutSchema);

@@ -13,13 +13,14 @@ router.get('/', function (req, res) {
         var admin = req.session.user.admin;
         var visited = req.session.user.visited;
         var school = req.session.user.school;
-        var switch_role = false;
-        if(req.session.user.switch) {
-            switch_role = req.session.user.switch;
+        if(req.session.user.switch_role) {
+            var switch_role = req.session.user.switch_role;
+        } else {
+            var switch_role = false;
         }
 
-        if (admin) {
-            Form.find({school: school}, function (err, forms) {
+        if (admin&&switch_role===false) {
+            Form.find({school: school, username: { $ne: username }}, function (err, forms) {
                 if (err) {
                     console.log(err);
                     res.redirect('/');
