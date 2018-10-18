@@ -1,0 +1,203 @@
+<%- include partials/begin.ejs %>
+<% if(login){ %>
+<%- include partials/navigation.ejs %>
+<% } else { %>
+<%- include partials/login-navigation.ejs %>
+<% } %>
+<div class="container">
+
+    <div class="jumbotron" style="background-color: #FFFFFF;">
+        <nav data-toggle="affix" id="navbar-example2" class="sticky-top navbar navbar-dark bg-dark">
+            <a class="navbar-brand"></a>
+            <ul class="nav">
+                <li class="nav-item dropdown">
+                    <a class="btn btn-outline-light dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#new-application">
+                            How do I start a new application?
+                        </a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#create-form">
+                            How do I create a form?
+                        </a>
+                        <a class="dropdown-item" href="#leaveComment">
+                            How do I leave a comment?
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="top-buffer-lg"></div>
+
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="create-form" data-toggle="collapse" data-target="#create-form-body" aria-expanded="true" aria-controls="create-form-body">
+                    How do I create a form?
+                </div>
+                <div id="create-form-body" class="collapse show" aria-labelledby="create-form">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+
+        <div class="top-buffer-lg"></div>
+
+            <div class="card">
+                <div class="card-header" id="leaveComment" data-toggle="collapse" data-target="#leave-comment-body" aria-expanded="true" aria-controls="leave-comment-body">
+                    How do I leave a comment?
+                </div>
+                <div id="leave-comment-body" class="collapse show" aria-labelledby="leave-comment">
+                    <div class="card-body">
+                        <div class="h5-alt">Step 1</div>
+                        <p>Begin by clicking on "Dashboard" on the navigation menu, find the document you wish to comment on, and click "View".</p>
+                        <div class="row col-12">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <img alt="Leave comment step 1" style="width: 100%" src="images/user-guide-leave-a-comment-step-1.png">
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="h5-alt">Step 2</div>
+                        <p>You will then be presented with the completed form.</p>
+                        <div class="row col-12">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <img alt="Leave comment step 2" style="width: 100%" src="images/user-guide-leave-a-comment-step-2.png">
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="h5-alt">Step 3</div>
+                        <p>At the bottom of this form you will find an input box for comments, click on this box.</p>
+                        <div class="row col-12">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <img alt="Leave comment step 3" style="width: 100%" src="images/user-guide-leave-a-comment-step-3.png">
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="h5-alt">Step 4</div>
+                        <p>Type your comment, and click "Add Comment".</p>
+                        <div class="row col-12">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <img alt="Leave comment step 4" style="width: 100%" src="images/user-guide-leave-a-comment-step-4.png">
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="h5-alt">Step 5</div>
+                        <p>A message should then appear, confirming the time of your comment.</p>
+                        <div class="row col-12">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <img alt="Leave comment step 5" style="width: 100%" src="images/user-guide-leave-a-comment-step-5.png">
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="top-buffer-lg"></div>
+
+        <div class="card">
+            <div class="card-header" id="new-application" data-toggle="collapse" data-target="#new-application-body" aria-expanded="true" aria-controls="new-application-body">
+                How do I start a new application?
+            </div>
+            <div id="new-application-body" class="collapse show" aria-labelledby="new-application">
+                <div class="card-body">
+                    <div class="h5-alt">Step 1</div>
+                    <p>Begin by making your way to the navigation bar.</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 1" style="width: 100%" src="images/user-guide-new-application-step-1.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="h5-alt">Step 2</div>
+                    <p>Then click on "New Ethics Form" and choose the appropriate dropdown.</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 2" style="width: 100%" src="images/user-guide-new-application-step-2.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="h5-alt">Step 3</div>
+                    <p>Find the form you need and click "Start Application".</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 3" style="width: 100%" src="images/user-guide-new-application-step-3.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="h5-alt">Step 4</div>
+                    <p>Fill out the form with the details of you application.</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 4" style="width: 100%" src="images/user-guide-new-application-step-4.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="h5-alt">Step 5</div>
+                    <p>Once complete, click submit at the bottom of the page.</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 5" style="width: 100%" src="images/user-guide-new-application-step-5.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="h5-alt">Step 6</div>
+                    <p>You will then be transferred to a file upload screen, which gives you an opportunity to upload any relevant files.
+                        Click on the "Browse" button to view files.
+                        Additional files can also be added at a later time.</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 6" style="width: 100%" src="images/user-guide-new-application-step-6.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="h5-alt">Step 7</div>
+                    <p>Choose the file you would like to upload.</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 7" style="width: 100%" src="images/user-guide-new-application-step-7.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="h5-alt">Step 8</div>
+                    <p>Select the "Open" option.</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 8" style="width: 100%" src="images/user-guide-new-application-step-8.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="h5-alt">Step 9</div>
+                    <p>Then you can either add the file, or proceed without.</p>
+                    <div class="row col-12">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <img alt="Leave comment step 9" style="width: 100%" src="images/user-guide-new-application-step-9.png">
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>
