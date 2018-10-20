@@ -18,10 +18,9 @@ router.get('/', function (req, res) {
                 console.log(err);
                 res.redirect('/dashboard');
             } if(!layout) {
-                console.log("No form was found!");
                 res.redirect('/dashboard');
             } else {
-                return res.render('new-application', {page_name:'new-application', title:'New Application', layout, admin: admin});
+                return res.render('new-application', {page_name:'new-application', title:'UEA Ethics Approval - New Application', layout, admin: admin});
             }
         });
     }
@@ -111,7 +110,6 @@ router.post('/', function (req, res) {
             console.log(evaluation_date);
 
             FormLayout.findOne({form_layout_no: layout_no, form_version_no: version_no}, function (err, layout) {
-                console.log(layout);
                 var answers = '{';
                 if (layout.questions.length > 0) {
                     layout.questions.forEach(function (a) {

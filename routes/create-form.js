@@ -21,7 +21,8 @@ router.post('/', function (req, res) {
         var questions = req.body.questions;
         var creator = req.session.user.username;
 
-        if(req.session.document&&req.session.version) {
+        FormLayout.distinct('form_layout_no', function (err, array) {
+            var number = array.length+1;
             var form_layout = {
                 name: form_name,
                 form_type: form_type,
@@ -29,9 +30,9 @@ router.post('/', function (req, res) {
                 raw_html: raw_html,
                 creator: creator,
                 questions: questions,
+                form_layout_no: number,
                 disabled: false,
-                form_layout_no: req.session.document,
-                form_version_no: parseInt(req.session.version) + 1
+                form_version_no: 1
             };
             var newFormLayout = new FormLayout(form_layout);
             FormLayout.createFormLayout(newFormLayout, function (err, form_layout) {
@@ -41,36 +42,12 @@ router.post('/', function (req, res) {
                     res.redirect('/forms');
                 }
             });
-            req.session.document = null;
-            req.session.version = null;
+        });
+
         } else {
-            FormLayout.distinct('form_layout_no', function (err, array) {
-                var number = array.length+1;
-                var form_layout = {
-                    name: form_name,
-                    form_type: form_type,
-                    template: html_template,
-                    raw_html: raw_html,
-                    creator: creator,
-                    questions: questions,
-                    form_layout_no: number,
-                    disabled: false,
-                    form_version_no: 1
-                };
-                var newFormLayout = new FormLayout(form_layout);
-                FormLayout.createFormLayout(newFormLayout, function (err, form_layout) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        res.redirect('/forms');
-                    }
-                });
-            });
+            console.log("You do not have the correct permissions to perform this task.");
+            res.redirect('/restricted');
         }
-    } else {
-        console.log("You do not have the correct permissions to perform this task.");
-        res.redirect('/restricted');
-    }
     });
 
 module.exports = router;

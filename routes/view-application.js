@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
                 res.redirect('/');
             } else {
                 var form = form.toObject();
-                FormLayout.findOne({form_layout_no: form.form_layout_no}, function (err, layout) {
+                FormLayout.findOne({form_layout_no: form.form_layout_no, form_version_no: form.form_version_no}, function (err, layout) {
                     if(err){
                         console.log(err);
                         res.redirect('/');

@@ -39,9 +39,18 @@ return time;
                     <%- layout.template %>
                 </form>
             </div>
+            <% if(admin){ %>
             <strong>Document Layout Version:</strong> <%= layout.form_version_no %><br/>
+            <% } %>
             <strong>Uploaded:</strong> <%= timeConverter(form.time) %><br/>
-            <strong>Last Updated:</strong> <%= timeConverter(form.last_update) %>
+            <strong>Last Updated:</strong> <%= timeConverter(form.last_update) %><br/>
+            <% if(form.evaluation_date){ %>
+            <strong>Evaluation Expected:</strong> <%= timeConverter(form.evaluation_date) %><br/>
+            <% } %>
+            <%
+            function capitaliseFirstLetter(word){return word.charAt(0).toUpperCase() + word.slice(1);}
+            %>
+            <strong>Application Status:</strong> <%= capitaliseFirstLetter(form.status) %>
             <div class="top-buffer"></div>
             <% if(form.attachments.length>0){ %>
             <div class="jumbotron" style="padding:0.4em; margin:0;">
@@ -64,10 +73,12 @@ return time;
             <form action="/update-application" method="get">
                 <input type="hidden" name="code" value="<%= form.code %>"/>
                 <input type="hidden" name="seq" value="<%= form.seq %>"/>
-                <input type="submit" class="btn btn-primary" value="Update"/>
+                <% if(form.status==="approved"&&admin||form.status!=="approved") {%>
+                <input type="submit" class="btn btn-primary" value="Update"<% if(form.status==="approved") {%>disabled<% } %>/>
+                <% } %>
                 <% if(admin===true){ %>
-                <a class="btn btn-success" href="#" data-toggle="modal" data-target="#markAsApproved">Approve</a>
-                <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#markAsDenied">Deny</a>
+                <a class="btn btn-success<% if(form.status==='approved') {%> disabled<%}%>" <% if(form.status==='approved') {%> aria-disbaled="true"<%}%> role="button" href="#"<% if(form.status!=='approved') {%> data-toggle="modal" data-target="#markAsApproved"<%}%>>Approve</a>
+                <a class="btn btn-danger<% if(form.status==='review') {%> disabled<%}%>" <% if(form.status==='review') {%> aria-disbaled="true"<%}%> role="button" href="#"<% if(form.status!=='review') {%> data-toggle="modal" data-target="#markAsDenied"<%}%>>Deny</a>
                 <% } %>
             </form>
         </div>
@@ -90,18 +101,19 @@ return time;
             <% } %>
         </div>
         <% } else { %>
-    <div class="jumbotron" style="padding-top:0;margin-top:0;background-color: #FFFFFF;">
-            <% if(typeof form.feedback_time != "undefined"){ %>
-        <hr>
-        <h4>Feedback</h4>
-        <div class="top-buffer-lg"></div>
-        <div class="form-group col-12">
-            <div class="alert alert-secondary"><div style="white-space: pre-wrap"><%= form.feedback %></div></div>
-            This feedback was given on  <%= timeConverter(form.feedback_time) %>
+
+        <div class="jumbotron" style="padding-top:0;margin-top:0;background-color: #FFFFFF;">
+            <% if(typeof form.feedback_time != "undefined" && form.status != "approved"){ %>
+            <hr>
+            <h4>Feedback</h4>
+            <div class="top-buffer-lg"></div>
+            <div class="form-group col-12">
+                <div class="alert alert-secondary"><div style="white-space: pre-wrap"><%= form.feedback %></div></div>
+                This feedback was given on  <%= timeConverter(form.feedback_time) %>
+            </div>
+            <hr>
+                <% } %>
         </div>
-        <hr>
-            <% } %>
-    </div>
 
     <% } %>
         <script>

@@ -4,46 +4,56 @@ var router = express.Router();
 var Form = require('../models/form');
 
 router.post('/', function (req, res) {
-    var school = req.session.user.school;
+    if(req.session.user.admin) {
 
-    var search_criteria = req.body.search_criteria;
-    var text = req.body.text;
+        var school = req.session.user.school;
+        var username = req.session.user.username;
+        var search_criteria = req.body.search_criteria;
+        var text = req.body.text;
 
-    if(search_criteria==="lname"){
-        Form.find({school: school, last_name: {$regex: text, $options: "i"}}, function (err, forms) {
-            if (err) {
-                console.log(err);
-                res.redirect('/dashboard');
-            }
-            else {
-                res.send(forms)
-            }
-        });
-    } else if(search_criteria==="application_id"){
-        var n = text.lastIndexOf('/');
-        var seq = text.substring(n + 1);
-        var code = text.substr(0, text.lastIndexOf("/"));
-        Form.find({school: school, code:code, seq:seq}, function (err, forms) {
-            if (err) {
-                res.send(err)
-            }
-            else {
-                res.send(forms)
-            }
-        });
-    } else if(search_criteria==="username"){
-        Form.find({school: school, username : {"$regex":text, $options: "i"}}, function (err, forms) {
-            if (err) {
-                console.log(err);
-                res.redirect('/dashboard');
-            }
-            else {
-                res.send(forms)
-            }
-        });
+        if (search_criteria === "lname") {
+            Form.find({
+                school: school,
+                username: {$ne: username},
+                last_name: {$regex: text, $options: "i"}
+            }, function (err, forms) {
+                if (err) {
+                    console.log(err);
+                    res.redirect('/dashboard');
+                }
+                else {
+                    res.send(forms)
+                }
+            });
+        } else if (search_criteria === "application_id") {
+            var n = text.lastIndexOf('/');
+            var seq = text.substring(n + 1);
+            var code = text.substr(0, text.lastIndexOf("/"));
+            Form.find({school: school, username: {$ne: username}, code: code, seq: seq}, function (err, forms) {
+                if (err) {
+                    res.send(err)
+                }
+                else {
+                    res.send(forms)
+                }
+            });
+        } else if (search_criteria === "username") {
+            Form.find({
+                school: school,
+                username: {"$regex": text, $options: "i", $ne: username}
+            }, function (err, forms) {
+                if (err) {
+                    console.log(err);
+                    res.redirect('/dashboard');
+                }
+                else {
+                    res.send(forms)
+                }
+            });
+        }
+    } else {
+        redirect('/dashboard');
     }
-
-
 });
 
 module.exports = router;

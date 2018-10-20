@@ -5,7 +5,7 @@
 <div class="container">
 
     <div class="jumbotron" style="background-color: #FFFFFF">
-        <% if(typeof object == 'object' && object){ %>
+        <% if(typeof object == 'object' && object && object.length > 0){ %>
         <div class="row">
             <% var no = 0; object.forEach(function(details){ no++;%>
             <div class="col-sm-6">
@@ -38,10 +38,10 @@
                 const status = $(this).data("status");
                 $.ajax({
                     url: 'toggle-disabled',
-                    data: {layout:layout,status:''+status},
+                    data: {layout:layout,status: status},
                     type: 'POST',
                     success: function() {
-                        location.reload();
+                        location.reload(true);
                     }
                 });
             })

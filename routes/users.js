@@ -37,7 +37,8 @@ router.post('/', function (req, res) {
             type_of_user: type_of_user,
             school: school,
             memorable_word: memorable_word,
-            memorable_word_answer: memorable_word_answer
+            memorable_word_answer: memorable_word_answer,
+            admin: false,
         }
 
         var newUser = new User(user);

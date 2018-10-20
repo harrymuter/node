@@ -1,5 +1,6 @@
 
-$(document).ready(function(){
+$(document).ready(function() {
+
 
     var custom_select = [];
     var subtitle = '';
@@ -80,7 +81,7 @@ $(document).ready(function(){
         var form = getUrlVars($(this).serialize());
         var newform = $("#newForm");
 
-        if (form.required="no") {
+        if (form.required = "no") {
             var html = '<div class="row col-12 ' + stamp + '" data-identifier="' + stamp + '">' +
                 '<div class="row col-12"><label class="col-4 col-form-label" for="' + stamp + '">' + unescape(form.select_input).trim() + '</label>' +//abba
                 '<div class="form-group col-4">' +
@@ -89,8 +90,8 @@ $(document).ready(function(){
             for (var i = 0; i < custom_select.length; i++) {
                 var option = custom_select[i] + '_option';
                 var val = custom_select[i] + '_val';
-                if(form[val]!==""&&form[option]!=="")
-                html += '<option value="'+ unescape(form[val]).trim() +'">'+  unescape(form[option]).trim() +'</option>';
+                if (form[val] !== "" && form[option] !== "")
+                    html += '<option value="' + unescape(form[val]).trim() + '">' + unescape(form[option]).trim() + '</option>';
             }
 
             html += '</select>' +
@@ -133,12 +134,10 @@ $(document).ready(function(){
         $('#options').html('');
         $('#select_input').val('');
         $('#select_required').val('');
-
         if ($('#toggle-controls').is(':checked')) {
             $('.delete').hide();
             $('.move').hide();
         }
-
     });
 
     $("#add_divider").on('click',function(e) {
@@ -164,43 +163,6 @@ $(document).ready(function(){
         $("#options").empty();
     });
 
-    $("#submit_layout").submit(function(e) {
-        e.preventDefault();
-        var form = $('#newForm');
-        var form_type = $('#form_type').val();
-
-        $('#form_type_display').val(form_type);
-
-        var html_raw = form.html();
-        html_raw = html_raw.replace(/(\r\n\t|\n|\r\t)/gm,"");
-
-        $(".delete").remove();
-        $(".move").remove();
-
-        var html = form.html();
-        html = html.replace(/(\r\n\t|\n|\r\t)/gm,"");
-
-        if(form_name!=="") {
-            if(subtitle!=="") {
-                $.ajax({
-                    type: 'post',
-                    url: 'create-form',
-                    data: {
-                        form_type: form_type,
-                        html_template: unescape(html).trim(),
-                        raw_html: unescape(html_raw).trim(),
-                        questions: array_of_questions,
-                        form_name: form_name
-                    },
-                    success: setTimeout(function(){ window.location.href = '/update-a-form' }, 1000)
-                });
-            } else {
-                $('#form_subtitle_input').css('border-color','red');
-            }
-        } else {
-            $('#form_title_input').css('border-color','red');
-        }
-    });
 
     $(document).on('click', '.delete', function(){
         var class_to_delete = $(this).data('identifier');
@@ -240,19 +202,19 @@ $(document).ready(function(){
         var stamp = Date.now();
         var custom_select_html = $("#options");
         custom_select_html.append('<div class="row col-12 '+stamp+'">'+
-        '<div class="form-group col-5">'+
-        '<label for="select_option" class="sr-only">Value</label>'+
-        '<input name="'+stamp+'_option" type="text" class="form-control" id="'+stamp+'_option" placeholder="Option" required>'+
-        '</div>'+
-        '<div style="vertical-align: middle; margin:0; padding:0; cursor: pointer" class="assign-value" data-identifier="'+stamp+'">'+
-        '<span style="vertical-align: middle; margin:0; padding:0;" class="glyphicon glyphicon-arrow-right"></span>'+
-        '</div>'+
-        '<div class="form-group col-5">'+
-        '<label for="select_value" class="sr-only">Value</label>'+
-        '<input name="'+stamp+'_val" id="' + stamp + '" type="text" class="form-control" id="select_value" placeholder="Value" required>'+
-        '</div>'+
-        '<div class="delete" style="vertical-align:middle;margin:0;padding:0" data-identifier="' + stamp + '" ><span style="vertical-align: middle; margin:0; padding:0;" class="col-12 glyphicon glyphicon-remove"></span>'+
-        '</div>');
+            '<div class="form-group col-5">'+
+            '<label for="select_option" class="sr-only">Value</label>'+
+            '<input name="'+stamp+'_option" type="text" class="form-control" id="'+stamp+'_option" placeholder="Option" required>'+
+            '</div>'+
+            '<div style="vertical-align: middle; margin:0; padding:0; cursor: pointer" class="assign-value" data-identifier="'+stamp+'">'+
+            '<span style="vertical-align: middle; margin:0; padding:0;" class="glyphicon glyphicon-arrow-right"></span>'+
+            '</div>'+
+            '<div class="form-group col-5">'+
+            '<label for="select_value" class="sr-only">Value</label>'+
+            '<input name="'+stamp+'_val" id="' + stamp + '" type="text" class="form-control" id="select_value" placeholder="Value" required>'+
+            '</div>'+
+            '<div class="delete" style="vertical-align:middle;margin:0;padding:0" data-identifier="' + stamp + '" ><span style="vertical-align: middle; margin:0; padding:0;" class="col-12 glyphicon glyphicon-remove"></span>'+
+            '</div>');
         custom_select.push(stamp);
     });
 
@@ -412,4 +374,35 @@ $(document).ready(function(){
         };
     });
 
+    $("#submit_layout").submit(function (e) {
+        e.preventDefault();
+
+        var form = $('#newForm');
+        var form_type = $('#form_type').val();
+        var form_name = $('#form_title').html();
+        console.log(form_name);
+
+        var html_raw = form.html();
+        html_raw = html_raw.replace(/(\r\n\t|\n|\r\t)/gm, "");
+
+        $(".delete").remove();
+        $(".move").remove();
+
+        var html = form.html();
+        html = html.replace(/(\r\n\t|\n|\r\t)/gm, "");
+
+        $.ajax({
+            method:'POST',
+            type: 'POST',
+            url: 'update-form',
+            data: {
+                form_name: form_name,
+                form_type: form_type,
+                html_template: unescape(html).trim(),
+                raw_html: unescape(html_raw).trim(),
+                questions: array_of_questions,
+            },
+            success: setTimeout(function(){ window.location.href = '/update-a-form' }, 1000)
+        });
+    });
 });

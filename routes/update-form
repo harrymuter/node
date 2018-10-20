@@ -10,14 +10,12 @@ router.get('/', function (req, res) {
         var form_version_no = req.query.version_no;
         req.session.document = form_layout_no;
         req.session.version = form_version_no;
-        console.log('layout number: '+form_layout_no+' version:'+form_version_no);
 
         FormLayout.findOne({form_layout_no: form_layout_no, form_version_no: form_version_no}, function(err, form_layout) {
             if (err || !form_layout) {
-                console.log(err);
                 res.redirect('/');
             } else {
-                res.render('update-form', {page_name: 'update-form', title: 'Update a Form', form_layout, admin: admin});
+                res.render('update-form', {page_name: 'update-form', title: 'UEA Ethics Approval - Update a Form', form_layout, admin: admin});
             }
         });
     } else {
@@ -28,20 +26,24 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
     if(req.session.user) {
+
         var form_name = req.body.form_name;
         var html_template = req.body.html_template;
         var raw_html = req.body.raw_html;
         var questions = req.body.questions;
+        var form_type = req.body.form_type;
         var creator = req.session.user.username;
+        var version = parseInt(req.session.version, 10)+1;
 
         var form_layout = {
             name: form_name,
+            form_type: form_type,
+            creator: creator,
             template: html_template,
             raw_html: raw_html,
-            creator: creator,
             questions: questions,
             form_layout_no: req.session.document,
-            version: req.session.version+1,
+            form_version_no: version,
             disabled: false
         };
         req.session.document = null;

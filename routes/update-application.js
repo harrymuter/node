@@ -30,7 +30,7 @@ router.get('/', function (req, res) {
                     } else {
                         return res.render('update-application', {
                             page_name: 'view',
-                            title: 'View Application',
+                            title: 'UEA Ethics Application - Update Application',
                             form,
                             layout,
                             user: req.session.user,
@@ -67,30 +67,36 @@ router.post('/', function (req, res) {
                 res.redirect('/');
             }
             else {
-                FormLayout.findOne({form_layout_no: form.form_layout_no}, function (err, layout) {
+                FormLayout.findOne({form_layout_no: form.form_layout_no, form_layout_no: form.form_layout_no}, function (err, layout) {
                     if (err){
                         console.log(err);
                         res.redirect('/');
                     } else {
                         var answers = '{';
-                        layout.questions.forEach(function (a) {
-                            var str = a.toString();
-                            if (req.body[str] !== "") {
-                                answers += '"' + str + '": ' + ' "' + req.body[str] + '", ';
-                            }
-                        });
-                        answers = answers.substring(0, answers.length - 2);
+                        if (layout) {
+                            layout.questions.forEach(function (a) {
+                                var str = a.toString();
+                                if (req.body[str] !== "") {
+                                    answers += '"' + str + '": ' + ' "' + req.body[str] + '", ';
+                                }
+                            });
+                            answers = answers.substring(0, answers.length - 2);
+                        }
                         answers += '}';
+                        console.log(answers);
                         answers = JSON.parse(answers);
-
+                        var current_evaluation_date = form.evaluation_date;
                         Form.update({code: req.session.code, seq: req.session.seq}, {
                             answers: answers,
                             administrator: administrator,
-                            project_title: project_title
+                            last_update: Date.now(),
+                            project_title: project_title,
+                            evaluation_date: current_evaluation_date+(3*24*60*60*1000),
+                            status: 'pending',
                         }, function () {
                             res.redirect(url.format({
-                                pathname:"/add-file",
-                                query:req.session.query,
+                                pathname: "/add-file",
+                                query: req.session.query,
                             }));
                         });
                     }

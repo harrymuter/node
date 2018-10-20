@@ -2,7 +2,16 @@
 <%- include partials/navigation.ejs %>
 <div class="container">
     <div class="jumbotron" style="background-color: #FFF; margin: 0; padding-bottom: 0">
-
+        <div class="row col-12">
+            <label class="col-4 col-form-label" for="form_type">Form Type *</label>
+            <div class="form-group col-4">
+                <select type="text" name="form_type" id="form_type" class="form-control" required >
+                    <option value="individual">Individual</option>
+                    <option value="module">Module</option>
+                </select>
+            </div>
+        </div>
+        <div class="top-buffer-lg"></div>
         <div class="h3-alt">Update: <%= form_layout.name %></div>
 
         <%- include partials/edit.ejs %>
@@ -37,10 +46,12 @@
 <script>
 
     var form_name = "";
-    var array_of_questions = [];
+    var array_of_questions = <%= form_layout.questions %>;
+
+    $("#form_type").val("<%=form_layout.form_type%>");
 
 </script>
-<script src="javascripts/create-form.js"></script>
+<script src="javascripts/update-form.js"></script>
 
 
 

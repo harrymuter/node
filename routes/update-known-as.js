@@ -4,10 +4,10 @@ var User = require('../models/user');
 
 router.post('/', function (req, res) {
     if(req.session.user) {
-        var ka = req.body.ka;
+        var ka = req.body.known_as;
         req.session.user.ka = ka;
         var username = req.session.user.username;
-        User.updateOne({username: username}, {ka: ka}, {upsert: false}, function (err, user) {
+        User.updateOne({username: username}, {known_as: ka}, {upsert: false}, function (err, user) {
             if (err || !user) {
                 res.redirect('/profile?s_ka=error');
             } else {

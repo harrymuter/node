@@ -6,6 +6,9 @@
     <li class="nav-item">
         <a class="nav-link" id="pills-refine-tab" data-toggle="pill" href="#pills-refine" role="tab" aria-controls="pills-refine" aria-selected="false">Filter Search</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link btn-outline-danger" href="high-priority">High Priority</a>
+    </li>
 
 </ul>
 <div class="top-buffer-lg"></div>
@@ -57,6 +60,12 @@
                 </div>
                 </fieldset>
                 <fieldset>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="search_criteria" id="application_date" value="application_date">
+                        <label class="form-check-label" for="application_date">Date</label>
+                    </div>
+                </fieldset>
+                <fieldset>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="search_criteria" id="application_id" value="application_id">
                     <label class="form-check-label" for="application_id">Application ID</label>
@@ -67,6 +76,13 @@
                 <button class="btn btn-outline-success btn-sm mr-1" type="submit">Search</button>
                 <div class="btn btn-outline-danger btn-sm" id="clear-search">Clear</div>
             </form>
+        </nav>
+        <nav class="navbar navbar-light bg-light">
+            <div class="input-daterange input-group" id="datepicker">
+                <input type="text" class="input-sm form-control" name="start" />
+                <span class="input-group-addon">to</span>
+                <input type="text" class="input-sm form-control" name="end" />
+            </div>
         </nav>
         <div id="response"></div>
 
@@ -127,5 +143,13 @@
             }
         });
         e.preventDefault();
+    });
+
+    $('#sandbox-container .input-daterange').datepicker({
+        maxViewMode: 0,
+        clearBtn: true,
+        language: "en-GB",
+        orientation: "top left",
+        toggleActive: true
     });
 </script>

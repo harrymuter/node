@@ -1,0 +1,104 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+<div class="container">
+    <div class="jumbotron" style="background-color: #FFF">
+        <% if(admin==true){ %>
+
+        <div class="col-md-12" style="margin-bottom: 2em;">
+            <div class="h3-alt">High Priority Applications</div>
+        </div>
+        <% if(overdue.length > 0){ %>
+        <div class="card">
+            <div style="cursor: pointer" class="card-header alert-danger" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="h5-alt mb-0">
+                    Overdue <span class="badge badge-dark"></span> <span id="headingOneIcon" style="float: right;" class="glyphicon glyphicon-minus"></span>
+                </div>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                <div class="card-body">
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-4"><strong>Title</strong></div>
+                        <div class="col-3"><strong>Code</strong></div>
+                        <div class="col-3"><strong>Due</strong></div>
+                        <div class="col-1"></div>
+                        <div class="col-1"></div>
+                    </div>
+
+                    <% for (var i=0; i < overdue.length; i++) { %>
+                    <div class="row top-buffer">
+                        <div class="col-4"><%= overdue[i].project_title %></div>
+                        <div class="col-3"><%= overdue[i].code + "/" + overdue[i].seq %></div>
+                        <div class="col-3"><%= moment(overdue[i].evaluation_date).fromNow() %></div>
+                        <div class="col-1">
+                            <form action="view-application" method="get">
+                                <input type="hidden" name="code" value="<%= overdue[i].code %>"/>
+                                <input type="hidden" name="seq" value="<%= overdue[i].seq %>"/>
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="View"/>
+                            </form>
+                        </div>
+                        <div class="col-1">
+                            <form action="update-application" method="get">
+                                <input type="hidden" name="code" value="<%= overdue[i].code %>"/>
+                                <input type="hidden" name="seq" value="<%= overdue[i].seq %>"/>
+                                <input type="submit" class="btn btn-sm btn-outline-dark" value="Update"/>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        </div>
+        <% } %>
+
+        <% if(soon.length > 0){ %>
+        <div class="card">
+            <div style="cursor: pointer" class="card-header alert-warning" id="headingTwo" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <div class="h5-alt mb-0">
+                    Due Soon (3 Days) <span class="badge badge-dark"></span> <span id="headingTwoIcon" style="float: right;" class="glyphicon glyphicon-minus"></span>
+                </div>
+            </div>
+            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4"><strong>Title</strong></div>
+                            <div class="col-3"><strong>Code</strong></div>
+                            <div class="col-3"><strong>Due</strong></div>
+                            <div class="col-1"></div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        <% for (var i=0; i < soon.length; i++) { %>
+                        <div class="row top-buffer">
+                            <div class="col-4"><%= soon[i].project_title %></div>
+                            <div class="col-3"><%= soon[i].code + "/" + soon[i].seq %></div>
+                            <div class="col-3"><%= moment(soon[i].evaluation_date).fromNow() %></div>
+                            <div class="col-1">
+                                <form action="view-application" method="get">
+                                    <input type="hidden" name="code" value="<%= soon[i].code %>"/>
+                                    <input type="hidden" name="seq" value="<%= soon[i].seq %>"/>
+                                    <input type="submit" class="btn btn-sm btn-outline-dark" value="View"/>
+                                </form>
+                            </div>
+                            <div class="col-1">
+                                <form action="update-application" method="get">
+                                    <input type="hidden" name="code" value="<%= soon[i].code %>"/>
+                                    <input type="hidden" name="seq" value="<%= soon[i].seq %>"/>
+                                    <input type="submit" class="btn btn-sm btn-outline-dark" value="Update"/>
+                                </form>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
+</div>
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

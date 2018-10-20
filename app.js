@@ -70,6 +70,8 @@ var newApplication = require('./routes/new-application');
 var viewApplication = require('./routes/view-application');
 var updateAForm = require('./routes/update-a-form');
 var FAQ = require('./routes/faq');
+var toggleDisabled = require('./routes/toggle-disabled');
+var highPriority = require('./routes/show-high-priority');
 
 var app = express();
 app.locals.moment = moment;
@@ -120,6 +122,8 @@ app.use('/update-application', updateApplication);
 app.use('/update-a-form', updateAForm);
 app.use('/FAQs', FAQ);
 app.use('/toggle-view', toggleView);
+app.use('/toggle-disabled', toggleDisabled);
+app.use('/high-priority', highPriority);
 
 
 //
