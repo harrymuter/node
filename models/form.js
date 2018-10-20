@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-var tunnel = require('tunnel-ssh');
-
+mongoose.connect('mongodb://127.0.0.1:27017/nodeauth', { useNewUrlParser: true });
 
     const FormSchema = mongoose.Schema({
         first_name:  String,
