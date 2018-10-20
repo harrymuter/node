@@ -43,9 +43,9 @@
 
     </div>
     <div class="tab-pane fade" id="pills-refine" role="tabpanel" aria-labelledby="pills-refine-tab">
-        <nav class="navbar navbar-light bg-light justify-content-between">
-            <a class="navbar-brand">Application Search</a>
-            <form id="search_forms" class="form-inline">
+        <nav class="navbar navbar-light bg-light navbar-expand-sm">
+            <a class="navbar-brand col-3">Application Search</a>
+            <form id="search_forms" class="form-inline w-100">
                 <legend class="sr-only"></legend>
                 <fieldset>
                 <div class="form-check form-check-inline">
@@ -60,29 +60,54 @@
                 </div>
                 </fieldset>
                 <fieldset>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="search_criteria" id="application_date" value="application_date">
-                        <label class="form-check-label" for="application_date">Date</label>
-                    </div>
-                </fieldset>
-                <fieldset>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="search_criteria" id="application_id" value="application_id">
                     <label class="form-check-label" for="application_id">Application ID</label>
                 </div>
                 </fieldset>
+                <fieldset>
                 <label class="sr-only" for="search">Search Bar</label>
                 <input id="search" name="text" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success btn-sm mr-1" type="submit">Search</button>
                 <div class="btn btn-outline-danger btn-sm" id="clear-search">Clear</div>
+                </fieldset>
             </form>
         </nav>
-        <nav class="navbar navbar-light bg-light">
-            <div class="input-daterange input-group" id="datepicker">
-                <input type="text" class="input-sm form-control" name="start" />
-                <span class="input-group-addon">to</span>
-                <input type="text" class="input-sm form-control" name="end" />
-            </div>
+        <nav class="navbar navbar-light bg-light navbar-expand-sm">
+            <a class="navbar-brand col-3"></a>
+            <form id="date" class="form-inline w-100">
+                <fieldset>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="search_criteria" id="inclue_date" value="inclue_date">
+                        <label class="form-check-label" for="inclue_date">Refine Date</label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="col-10" id="sandbox-container">
+                        <div class="input-daterange input-group" id="datepicker">
+                            <div class="col-6">
+                                <label for="startDate" class="sr-only">From</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="FromPrepend">From</span>
+                                    </div>
+                                    <input name="start" type="text" class="form-control" id="startDate" placeholder="Start" data-date-format="mm/dd/yyyy" aria-describedby="FromPrepend" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="startDate" class="sr-only">From</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="UntilPrepend">Until</span>
+                                    </div>
+                                    <input name="end" type="text" class="form-control" id="endDate" placeholder="End" data-date-format="mm/dd/yyyy" aria-describedby="UntilPrepend" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
         </nav>
         <div id="response"></div>
 
@@ -144,12 +169,12 @@
         });
         e.preventDefault();
     });
-
     $('#sandbox-container .input-daterange').datepicker({
         maxViewMode: 0,
+        format: 'dd/mm/yyyy',
         clearBtn: true,
         language: "en-GB",
         orientation: "top left",
-        toggleActive: true
+        toggleActive: true,
     });
 </script>
