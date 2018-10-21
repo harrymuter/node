@@ -1,0 +1,322 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+<div class="container">
+    <div class="jumbotron" style="background-color: #FFF">
+
+        <% var UG=0; var PGT=0; var PGR=0; var SRA=0; var Faculty=0; var Other=0;
+
+        for (var i=0; i < forms.length; i++) {
+            if(forms[i].level === "UG"){
+                UG++;
+            }
+            else if(forms[i].level === "PGT"){
+                PGT++;
+            }
+            else if(forms[i].level === "PGR"){
+                PGR++;
+            }
+            else if(forms[i].level === "S(RA)"){
+                SRA++;
+            }
+            else if(forms[i].level === "Faculty"){
+                Faculty++;
+            }
+            else{
+                Other++;
+            }
+        } %>
+
+        <% if(forms.length > 0){ %>
+            <% if(UG>0){ %>
+                <% var approved = 0; %>
+                <% var rejected = 0; %>
+        <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>UG</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Accept</th>
+                        <th>Reject</th>
+                        <th>Reference</th>
+                    </tr>
+                    </thead>
+                    <% for (var i=0; i < forms.length; i++) { %>
+                        <% if(forms[i].level === "UG"){ %>
+                            <tr>
+                                <td scope="row"></td>
+                                <td><%=forms[i].last_name%></td>
+                                <td><%=forms[i].first_name%></td>
+                                    <%if(forms[i].status==="approved"){ %>
+                                        <% approved++; %>
+                                        <td><%=forms[i].status%></td>
+                                        <td></td>
+                                    <%} else { %>
+                                        <% rejected++; %>
+                                        <td></td>
+                                        <td><%=forms[i].status%></td>
+                                    <%}%>
+                                <td></td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><%=approved%></td>
+                        <td><%=rejected%></td>
+                        <td></td>
+                    </tr>
+                </table>
+        </div>
+            <% } %>
+        <% } %>
+
+        <% if(forms.length > 0){ %>
+        <% if(PGT>0){ %>
+        <% var approved = 0; %>
+        <% var rejected = 0; %>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>UG</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                    <th>Reference</th>
+                </tr>
+                </thead>
+                <% for (var i=0; i < forms.length; i++) { %>
+                <% if(forms[i].level === "PGT"){ %>
+                <tr>
+                    <td scope="row"></td>
+                    <td><%=forms[i].last_name%></td>
+                    <td><%=forms[i].first_name%></td>
+                    <%if(forms[i].status==="approved"){ %>
+                    <% approved++; %>
+                    <td><%=forms[i].status%></td>
+                    <td></td>
+                    <%} else { %>
+                    <% rejected++; %>
+                    <td></td>
+                    <td><%=forms[i].status%></td>
+                    <%}%>
+                    <td></td>
+                </tr>
+                <% } %>
+                <% } %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><%=approved%></td>
+                    <td><%=rejected%></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <% } %>
+        <% } %>
+
+        <% if(forms.length > 0){ %>
+        <% if(PGR>0){ %>
+        <% var approved = 0; %>
+        <% var rejected = 0; %>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>UG</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                    <th>Reference</th>
+                </tr>
+                </thead>
+                <% for (var i=0; i < forms.length; i++) { %>
+                <% if(forms[i].level === "PGR"){ %>
+                <tr>
+                    <td scope="row"></td>
+                    <td><%=forms[i].last_name%></td>
+                    <td><%=forms[i].first_name%></td>
+                    <%if(forms[i].status==="approved"){ %>
+                    <% approved++; %>
+                    <td><%=forms[i].status%></td>
+                    <td></td>
+                    <%} else { %>
+                    <% rejected++; %>
+                    <td></td>
+                    <td><%=forms[i].status%></td>
+                    <%}%>
+                    <td></td>
+                </tr>
+                <% } %>
+                <% } %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><%=approved%></td>
+                    <td><%=rejected%></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <% } %>
+        <% } %>
+
+        <% if(forms.length > 0){ %>
+        <% if(SRA>0){ %>
+        <% var approved = 0; %>
+        <% var rejected = 0; %>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>UG</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                    <th>Reference</th>
+                </tr>
+                </thead>
+                <% for (var i=0; i < forms.length; i++) { %>
+                <% if(forms[i].level === "S(RA)"){ %>
+                <tr>
+                    <td scope="row"></td>
+                    <td><%=forms[i].last_name%></td>
+                    <td><%=forms[i].first_name%></td>
+                    <%if(forms[i].status==="approved"){ %>
+                    <% approved++; %>
+                    <td><%=forms[i].status%></td>
+                    <td></td>
+                    <%} else { %>
+                    <% rejected++; %>
+                    <td></td>
+                    <td><%=forms[i].status%></td>
+                    <%}%>
+                    <td></td>
+                </tr>
+                <% } %>
+                <% } %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><%=approved%></td>
+                    <td><%=rejected%></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <% } %>
+        <% } %>
+
+        <% if(forms.length > 0){ %>
+        <% if(Faculty>0){ %>
+        <% var approved = 0; %>
+        <% var rejected = 0; %>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>UG</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                    <th>Reference</th>
+                </tr>
+                </thead>
+                <% for (var i=0; i < forms.length; i++) { %>
+                <% if(forms[i].level === "Faculty"){ %>
+                <tr>
+                    <td scope="row"></td>
+                    <td><%=forms[i].last_name%></td>
+                    <td><%=forms[i].first_name%></td>
+                    <%if(forms[i].status==="approved"){ %>
+                    <% approved++; %>
+                    <td><%=forms[i].status%></td>
+                    <td></td>
+                    <%} else { %>
+                    <% rejected++; %>
+                    <td></td>
+                    <td><%=forms[i].status%></td>
+                    <%}%>
+                    <td></td>
+                </tr>
+                <% } %>
+                <% } %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><%=approved%></td>
+                    <td><%=rejected%></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <% } %>
+        <% } %>
+
+        <% if(forms.length > 0){ %>
+        <% if(Other>0){ %>
+        <% var approved = 0; %>
+        <% var rejected = 0; %>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>UG</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                    <th>Reference</th>
+                </tr>
+                </thead>
+                <% for (var i=0; i < forms.length; i++) { %>
+                <% if(forms[i].level === "Faculty"){ %>
+                <tr>
+                    <td scope="row"></td>
+                    <td><%=forms[i].last_name%></td>
+                    <td><%=forms[i].first_name%></td>
+                    <%if(forms[i].status==="approved"){ %>
+                    <% approved++; %>
+                    <td><%=forms[i].status%></td>
+                    <td></td>
+                    <%} else { %>
+                    <% rejected++; %>
+                    <td></td>
+                    <td><%=forms[i].status%></td>
+                    <%}%>
+                    <td></td>
+                </tr>
+                <% } %>
+                <% } %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><%=approved%></td>
+                    <td><%=rejected%></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <% } %>
+        <% } %>
+
+
+    </div>
+</div>
+<script src="javascripts/dashboard.js"></script>
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

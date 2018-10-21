@@ -78,29 +78,29 @@
             <form id="date" class="form-inline w-100">
                 <fieldset>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="search_criteria" id="inclue_date" value="inclue_date">
-                        <label class="form-check-label" for="inclue_date">Refine Date</label>
+                        <input class="form-check-input" type="checkbox" name="search_criteria" id="include_date">
+                        <label class="form-check-label" for="include_date">Refine Date</label>
                     </div>
                 </fieldset>
                 <fieldset>
                     <div class="col-10" id="sandbox-container">
                         <div class="input-daterange input-group" id="datepicker">
                             <div class="col-6">
-                                <label for="startDate" class="sr-only">From</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="FromPrepend">From</span>
                                     </div>
                                     <input name="start" type="text" class="form-control" id="startDate" placeholder="Start" data-date-format="mm/dd/yyyy" aria-describedby="FromPrepend" required>
+                                    <label class="sr-only" for="startDate">Start Date</label>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <label for="startDate" class="sr-only">From</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="UntilPrepend">Until</span>
                                     </div>
                                     <input name="end" type="text" class="form-control" id="endDate" placeholder="End" data-date-format="mm/dd/yyyy" aria-describedby="UntilPrepend" required>
+                                    <label class="sr-only" for="endDate">End Date</label>
                                 </div>
                             </div>
                         </div>
@@ -122,10 +122,13 @@
 
     $("#search_forms").submit(function(e) {
         var form = $(this);
+        var checked = $("#include_date")[0].checked;
+        var start_date = $("#startDate").val();
+        var end_date = $("#endDate").val();
         $.ajax({
             type: "POST",
             url: 'admin-action',
-            data: form.serialize(),
+            data: {form:form.serialize(),checked:checked,start:start_date,end:end_date},
             success: function(data)
             {
                 var html = '<div class="jumbotron" style="background-color: #FFFFFF">';

@@ -30,7 +30,7 @@ router.get('/', function (req, res) {
                     } else {
                         return res.render('update-application', {
                             page_name: 'view',
-                            title: 'UEA Ethics Application - Update Application',
+                            title: 'UEA REC Application - Update Application',
                             form,
                             layout,
                             user: req.session.user,

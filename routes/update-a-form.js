@@ -21,7 +21,7 @@ router.get('/', function (req, res) {
             });
             FormLayout.find({$or: search_criteria}, function (err, form) {
                 if (err) {
-                    res.render('update-a-form', {page_name: 'update-form', title: 'Update a Form', admin: admin})
+                    res.render('update-a-form', {page_name: 'update-form', title: 'UEA REC Application - Update a Form', admin: admin})
                 } else {
                     function capitalizeFirstLetter(string) {
                         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -70,7 +70,7 @@ router.get('/', function (req, res) {
                     object = JSON.parse(object);
                     res.render('update-a-form', {
                         page_name: 'update-form',
-                        title: 'Update a Form',
+                        title: 'UEA REC Application - Update a Form',
                         admin: admin,
                         object
                     })

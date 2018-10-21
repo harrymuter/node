@@ -22,6 +22,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/nodeauth', { useNewUrlParser: true }
             index: true
         },
         school: String,
+        level: String,
         form_layout_no: Number,
         form_version_no: Number,
         answers: Object,

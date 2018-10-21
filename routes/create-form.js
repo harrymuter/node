@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', function (req, res) {
     if(req.session.user && req.session.user.admin) {
         var admin = req.session.user.admin;
-        res.render('create-new-form',{page_name:'create-form',title:'Create a New Form', admin: admin});
+        res.render('create-new-form',{page_name:'create-form',title:'UEA REC Application - Create a New Form', admin: admin});
     } else {
         console.log("You do not have permission to view this content.");
         res.redirect('/restricted');

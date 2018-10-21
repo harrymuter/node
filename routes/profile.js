@@ -50,7 +50,7 @@ router.get('/', function (req, res) {
                 res.render('profile', {
                     admin: admin,
                     page_name: 'profile',
-                    title: 'Your Details',
+                    title: 'UEA REC Application - Your Details',
                     fname: fname,
                     lname: lname,
                     email: email,

@@ -26,7 +26,7 @@ router.get('/', function (req, res) {
                     } else {
                         return res.render('view', {
                             page_name: 'view',
-                            title: 'View Application',
+                            title: 'UEA REC Application - View Application',
                             form,
                             layout,
                             admin: admin

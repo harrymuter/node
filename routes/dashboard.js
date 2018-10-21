@@ -28,7 +28,7 @@ router.get('/', function (req, res) {
                 else {
                     res.render('dashboard', {
                         page_name: 'dashboard',
-                        title: 'Your Dashboard',
+                        title: 'UEA REC Application - Your Dashboard',
                         visited: visited,
                         fname: fname,
                         username: username,
@@ -48,7 +48,7 @@ router.get('/', function (req, res) {
                 else {
                     res.render('dashboard', {
                         page_name: 'dashboard',
-                        title: 'Your Dashboard',
+                        title: 'UEA REC Application - Your Dashboard',
                         visited: visited,
                         fname: fname,
                         username: username,

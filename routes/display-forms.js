@@ -41,7 +41,7 @@ router.get('/', function (req, res) {
                         }
                         object += ']';
                         object = JSON.parse(object);
-                        res.render('forms', {page_name: 'forms-module', title: 'Module Forms', admin: admin, object})
+                        res.render('forms', {page_name: 'forms-module', title: 'UEA REC Application - Module Forms', admin: admin, object})
 
                     }
                 });
@@ -49,10 +49,10 @@ router.get('/', function (req, res) {
                 FormLayout.find({$or: search_criteria, form_type:'individual', disabled: { $ne: true }}, function (err, form) {
                     if (err) {
                         var object = JSON.parse('[]');
-                        res.render('forms', {page_name: 'forms-individual', title: 'Individual Forms', admin: admin, object})
+                        res.render('forms', {page_name: 'forms-individual', title: 'UEA REC Application - Individual Forms', admin: admin, object})
                     } else if(!form){
                         var object = JSON.parse('[]');
-                        res.render('forms', {page_name: 'forms-individual', title: 'Individual Forms', admin: admin, object})
+                        res.render('forms', {page_name: 'forms-individual', title: 'UEA REC Application - Individual Forms', admin: admin, object})
                     } else {
                         var object = '[';
                         if (form.length > 0) {
@@ -68,7 +68,7 @@ router.get('/', function (req, res) {
                         object += ']';
 
                         object = JSON.parse(object);
-                        res.render('forms', {page_name: 'forms-individual', title: 'Individual Forms', admin: admin, object})
+                        res.render('forms', {page_name: 'forms-individual', title: 'UEA REC Application - Individual Forms', admin: admin, object})
 
                     }
                 });

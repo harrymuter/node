@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
             } else {
                 res.render('verify-reset', {
                     page_name:'reset-password',
-                    title:'Reset Password',
+                    title:'UEA REC Application - Reset Password',
                     username:username,
                     memorable_word:user.memorable_word,
                     admin: admin

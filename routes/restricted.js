@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function (req, res) {
     if(req.session.user) {
         var admin = req.session.user.admin;
-        res.render('restricted', {page_name: 'restricted', title: 'Restricted Content', admin:admin});
+        res.render('restricted', {page_name: 'restricted', title: 'UEA REC Application - Restricted Content', admin:admin});
     } else {
         res.redirect('/');
     }

@@ -20,7 +20,7 @@ router.get('/', function (req, res) {
             } if(!layout) {
                 res.redirect('/dashboard');
             } else {
-                return res.render('new-application', {page_name:'new-application', title:'UEA Ethics Approval - New Application', layout, admin: admin});
+                return res.render('new-application', {page_name:'new-application', title:'UEA REC Application - New Application', layout, admin: admin});
             }
         });
     }
@@ -47,6 +47,7 @@ router.post('/', function (req, res) {
 
             const fname = req.session.user.fname;
             const lname = req.session.user.lname;
+            const level= req.session.user.type_of_user;
             const username = req.session.user.username;
             const year = username.slice(3, -3);
             const type_of_user = req.session.user.type_of_user;
@@ -142,6 +143,7 @@ router.post('/', function (req, res) {
                     form_layout_no: layout_no,
                     form_version_no: version_no,
                     answers: answers,
+                    level: level,
                     project_title: project_title,
                     evaluation_date: evaluation_date,
                 });

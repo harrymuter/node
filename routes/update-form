@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
             if (err || !form_layout) {
                 res.redirect('/');
             } else {
-                res.render('update-form', {page_name: 'update-form', title: 'UEA Ethics Approval - Update a Form', form_layout, admin: admin});
+                res.render('update-form', {page_name: 'update-form', title: 'UEA REC Application - Update a Form', form_layout, admin: admin});
             }
         });
     } else {

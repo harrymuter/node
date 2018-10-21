@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', function (req, res) {
     if(req.session.user) {
         var admin = req.session.user.admin;
-        res.render('add-file',{page_name:'add-files',title:'Add Files', admin: admin, query:req.query});
+        res.render('add-file',{page_name:'add-files',title:'UEA REC Application - Add Files', admin: admin, query:req.query});
     } else {
         console.log("You do not have permission to view this content.");
         res.redirect('/restricted');

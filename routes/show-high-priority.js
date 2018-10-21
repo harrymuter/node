@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
         var admin = req.session.user.admin;
         Form.find({status: 'pending', evaluation_date: { $gt: Date.now(), $lt: (Date.now()+(3*24*60*60*1000)) }, },function(err, soon){
             Form.find({status: 'pending', evaluation_date: { $lte: Date.now() }, },function(err, overdue){
-            res.render('high-priority',{page_name:'high-priority',title:'UEA Ethics Application - High Priority', admin: admin, overdue:overdue, soon:soon});
+            res.render('high-priority',{page_name:'high-priority',title:'UEA REC Application - High Priority', admin: admin, overdue:overdue, soon:soon});
             })
         })
 

@@ -7,9 +7,9 @@ router.get('/', function (req, res) {
         res.redirect('/dashboard');
     } else {
         if(Object.keys(req.query).length !== 0) {
-            res.render('index', {page_name: 'index', title: 'UEA REC Application', error:req.query});
+            res.render('index', {page_name: 'index', title: 'UEA Ethics Approval', error:req.query});
         } else {
-            res.render('index', {page_name: 'index', title: 'UEA REC Application'});
+            res.render('index', {page_name: 'index', title: 'UEA Ethics Approval'});
         }
     }
 });
