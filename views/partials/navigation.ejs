@@ -42,6 +42,7 @@
                 case 'create-form':
                 case 'update-form':
                 case 'high-priority':
+                case 'overview':
                 %> active<% }%>">
                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Admin Panel
@@ -53,11 +54,12 @@
                     <a class="dropdown-item<% switch (page_name) {
                 case 'update-form':
                 %> active<% }%>" href="update-a-form">Update a Form</a>
-                <div class="dropdown-divider"></div>
-                <% if (admin == true) { %>
+                <div class="dropdown-divider">
+                </div>
                 <a class="dropdown-item<% switch (page_name) {
                 case 'high-priority': %> active<% } %>" href="/high-priority">High Priority</a>
-                <% } %>
+                <a class="dropdown-item<% switch (page_name) {
+                case 'overview': %> active<% } %>" href="/overview">Overview</a>
                 </div>
             </li>
 

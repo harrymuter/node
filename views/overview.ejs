@@ -3,6 +3,31 @@
 <div class="container">
     <div class="jumbotron" style="background-color: #FFF">
 
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-ug-all" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All Results</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-ug-tab" data-toggle="pill" href="#pills-ug" role="tab" aria-controls="pills-ug" aria-selected="true">UG</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-pgt-tab" data-toggle="pill" href="#pills-pgt" role="tab" aria-controls="pills-pgt" aria-selected="false">PGT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-pgr-tab" data-toggle="pill" href="#pills-pgr" role="tab" aria-controls="pills-pgr" aria-selected="false">PGR</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-sra-tab" data-toggle="pill" href="#pills-sra" role="tab" aria-controls="pills-sra" aria-selected="false">S(RA)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-faculty-tab" data-toggle="pill" href="#pills-faculty" role="tab" aria-controls="pills-faculty" aria-selected="false">Faculty</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-other-tab" data-toggle="pill" href="#pills-other" role="tab" aria-controls="pills-other" aria-selected="false">Other</a>
+            </li>
+        </ul>
+        <div class="top-buffer-lg"></div>
+
         <% var UG=0; var PGT=0; var PGR=0; var SRA=0; var Faculty=0; var Other=0;
 
         for (var i=0; i < forms.length; i++) {
@@ -21,286 +46,326 @@
             else if(forms[i].level === "Faculty"){
                 Faculty++;
             }
-            else{
+            else if(forms[i].level === "Other"){
                 Other++;
             }
         } %>
 
-        <% if(forms.length > 0){ %>
-            <% if(UG>0){ %>
+        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+                <% if(forms.length > 0){ %>
                 <% var approved = 0; %>
                 <% var rejected = 0; %>
+                <div class="table-responsive">
+                    <table id="allTable" class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Accepted</th>
+                            <th>Rejected</th>
+                            <th>Reference</th>
+                        </tr>
+                        </thead>
+                        <% for (var i=0; i < forms.length; i++) { %>
+                        <tr>
+                            <th><%=forms[i].level%></th>
+                            <td><%=forms[i].last_name%></td>
+                            <td><%=forms[i].first_name%></td>
+                            <%if(forms[i].status==="approved"){ %>
+                            <% approved++; %>
+                            <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
+                            <td></td>
+                            <%} else { %>
+                            <% rejected++; %>
+                            <td></td>
+                            <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
+                            <%}%>
+                            <td><a href="view-application?code=<%-forms[i].code%>&seq=<%=forms[i].seq%>"><%-forms[i].code+'/'+forms[i].seq%></a></td>
+                        </tr>
+                        <% } %>
+                        <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><%=approved%></td>
+                            <td><%=rejected%></td>
+                            <td></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <% } %>
+            </div>
+        <div class="tab-pane fade" id="pills-ug" role="tabpanel" aria-labelledby="pills-ug-tab">
+        <% if(forms.length > 0){ %>
+                <% var approved = 0; %>
+                <% var rejected = 0; %>
+
         <div class="table-responsive">
-        <table class="table table-hover table-bordered">
+        <table id="ugTable" class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <th>UG</th>
                         <th>Last Name</th>
                         <th>First Name</th>
-                        <th>Accept</th>
-                        <th>Reject</th>
+                        <th>Accepted</th>
+                        <th>Rejected</th>
                         <th>Reference</th>
                     </tr>
                     </thead>
                     <% for (var i=0; i < forms.length; i++) { %>
                         <% if(forms[i].level === "UG"){ %>
                             <tr>
-                                <td scope="row"></td>
                                 <td><%=forms[i].last_name%></td>
                                 <td><%=forms[i].first_name%></td>
                                     <%if(forms[i].status==="approved"){ %>
                                         <% approved++; %>
-                                        <td><%=forms[i].status%></td>
+                                        <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                                         <td></td>
                                     <%} else { %>
                                         <% rejected++; %>
                                         <td></td>
-                                        <td><%=forms[i].status%></td>
+                                        <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                                     <%}%>
-                                <td></td>
+                                <td><a href="view-application?code=<%-encodeURI(forms[i].code)%>&seq=<%=forms[i].seq%>"><%-forms[i].code+'/'+forms[i].seq%></a></td>
                             </tr>
                         <% } %>
                     <% } %>
+                    <tfoot>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td><%=approved%></td>
                         <td><%=rejected%></td>
                         <td></td>
                     </tr>
+                    </tfoot>
                 </table>
-        </div>
+            </div>
             <% } %>
-        <% } %>
-
+        </div>
+        <div class="tab-pane fade" id="pills-pgt" role="tabpanel" aria-labelledby="pills-pgt-tab">
         <% if(forms.length > 0){ %>
-        <% if(PGT>0){ %>
         <% var approved = 0; %>
         <% var rejected = 0; %>
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table id="pgtTable" class="table table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th>UG</th>
                     <th>Last Name</th>
                     <th>First Name</th>
-                    <th>Accept</th>
-                    <th>Reject</th>
+                    <th>Accepted</th>
+                    <th>Rejected</th>
                     <th>Reference</th>
                 </tr>
                 </thead>
                 <% for (var i=0; i < forms.length; i++) { %>
                 <% if(forms[i].level === "PGT"){ %>
                 <tr>
-                    <td scope="row"></td>
                     <td><%=forms[i].last_name%></td>
                     <td><%=forms[i].first_name%></td>
                     <%if(forms[i].status==="approved"){ %>
                     <% approved++; %>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <td></td>
                     <%} else { %>
                     <% rejected++; %>
                     <td></td>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <%}%>
-                    <td></td>
+                    <td><a href="view-application?code=<%-forms[i].code%>&seq=<%=forms[i].seq%>"><%-forms[i].code+'/'+forms[i].seq%></a></td>
                 </tr>
                 <% } %>
                 <% } %>
+                <tfoot>
                 <tr>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td><%=approved%></td>
                     <td><%=rejected%></td>
                     <td></td>
                 </tr>
+                </tfoot>
             </table>
         </div>
         <% } %>
-        <% } %>
-
+        </div>
+        <div class="tab-pane fade" id="pills-pgr" role="tabpanel" aria-labelledby="pills-pgr-tab">
         <% if(forms.length > 0){ %>
-        <% if(PGR>0){ %>
         <% var approved = 0; %>
         <% var rejected = 0; %>
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table id="pgrTable" class="table table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th>UG</th>
                     <th>Last Name</th>
                     <th>First Name</th>
-                    <th>Accept</th>
-                    <th>Reject</th>
+                    <th>Accepted</th>
+                    <th>Rejected</th>
                     <th>Reference</th>
                 </tr>
                 </thead>
                 <% for (var i=0; i < forms.length; i++) { %>
                 <% if(forms[i].level === "PGR"){ %>
                 <tr>
-                    <td scope="row"></td>
                     <td><%=forms[i].last_name%></td>
                     <td><%=forms[i].first_name%></td>
                     <%if(forms[i].status==="approved"){ %>
                     <% approved++; %>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <td></td>
                     <%} else { %>
                     <% rejected++; %>
                     <td></td>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <%}%>
-                    <td></td>
+                    <td><a href="view-application?code=<%-forms[i].code%>&seq=<%=forms[i].seq%>"><%-forms[i].code+'/'+forms[i].seq%></a></td>
                 </tr>
                 <% } %>
                 <% } %>
+                <tfoot>
                 <tr>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td><%=approved%></td>
                     <td><%=rejected%></td>
                     <td></td>
                 </tr>
+                </tfoot>
             </table>
         </div>
         <% } %>
-        <% } %>
-
+        </div>
+        <div class="tab-pane fade" id="pills-sra" role="tabpanel" aria-labelledby="pills-sra-tab">
         <% if(forms.length > 0){ %>
-        <% if(SRA>0){ %>
         <% var approved = 0; %>
         <% var rejected = 0; %>
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table id="sraTable" class="table table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th>UG</th>
                     <th>Last Name</th>
                     <th>First Name</th>
-                    <th>Accept</th>
-                    <th>Reject</th>
+                    <th>Accepted</th>
+                    <th>Rejected</th>
                     <th>Reference</th>
                 </tr>
                 </thead>
                 <% for (var i=0; i < forms.length; i++) { %>
                 <% if(forms[i].level === "S(RA)"){ %>
                 <tr>
-                    <td scope="row"></td>
                     <td><%=forms[i].last_name%></td>
                     <td><%=forms[i].first_name%></td>
                     <%if(forms[i].status==="approved"){ %>
                     <% approved++; %>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <td></td>
                     <%} else { %>
                     <% rejected++; %>
                     <td></td>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <%}%>
-                    <td></td>
+                    <td><a href="view-application?code=<%-forms[i].code%>&seq=<%=forms[i].seq%>"><%-forms[i].code+'/'+forms[i].seq%></a></td>
                 </tr>
                 <% } %>
                 <% } %>
+                <tfoot>
                 <tr>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td><%=approved%></td>
                     <td><%=rejected%></td>
                     <td></td>
                 </tr>
+                </tfoot>
             </table>
         </div>
         <% } %>
-        <% } %>
-
+        </div>
+        <div class="tab-pane fade" id="pills-faculty" role="tabpanel" aria-labelledby="pills-faculty-tab">
         <% if(forms.length > 0){ %>
-        <% if(Faculty>0){ %>
         <% var approved = 0; %>
         <% var rejected = 0; %>
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table id="facultyTable" class="table table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th>UG</th>
                     <th>Last Name</th>
                     <th>First Name</th>
-                    <th>Accept</th>
-                    <th>Reject</th>
+                    <th>Accepted</th>
+                    <th>Rejected</th>
                     <th>Reference</th>
                 </tr>
                 </thead>
                 <% for (var i=0; i < forms.length; i++) { %>
                 <% if(forms[i].level === "Faculty"){ %>
                 <tr>
-                    <td scope="row"></td>
                     <td><%=forms[i].last_name%></td>
                     <td><%=forms[i].first_name%></td>
                     <%if(forms[i].status==="approved"){ %>
                     <% approved++; %>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <td></td>
                     <%} else { %>
                     <% rejected++; %>
                     <td></td>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <%}%>
-                    <td></td>
+                    <td><a href="view-application?code=<%=encodeURIComponent(forms[i].code)%>&seq=<%=forms[i].seq%>"><%=forms[i].code+'/'+forms[i].seq%></a></td>
                 </tr>
                 <% } %>
                 <% } %>
+                <tfoot>
                 <tr>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td><%=approved%></td>
                     <td><%=rejected%></td>
                     <td></td>
                 </tr>
+                </tfoot>
             </table>
         </div>
         <% } %>
-        <% } %>
-
+        </div>
+        <div class="tab-pane fade" id="pills-other" role="tabpanel" aria-labelledby="pills-other-tab">
         <% if(forms.length > 0){ %>
-        <% if(Other>0){ %>
         <% var approved = 0; %>
         <% var rejected = 0; %>
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table id="otherTable" class="table table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th>UG</th>
+                    <th>Other</th>
                     <th>Last Name</th>
                     <th>First Name</th>
-                    <th>Accept</th>
-                    <th>Reject</th>
+                    <th>Accepted</th>
+                    <th>Rejected</th>
                     <th>Reference</th>
                 </tr>
                 </thead>
                 <% for (var i=0; i < forms.length; i++) { %>
-                <% if(forms[i].level === "Faculty"){ %>
+                <% if(forms[i].level === "Other"){ %>
                 <tr>
                     <td scope="row"></td>
                     <td><%=forms[i].last_name%></td>
                     <td><%=forms[i].first_name%></td>
                     <%if(forms[i].status==="approved"){ %>
                     <% approved++; %>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <td></td>
                     <%} else { %>
                     <% rejected++; %>
                     <td></td>
-                    <td><%=forms[i].status%></td>
+                    <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                     <%}%>
-                    <td></td>
+                    <td><a href="view-application?code=<%-forms[i].code%>&seq=<%=forms[i].seq%>"><%-forms[i].code+'/'+forms[i].seq%></a></td>
                 </tr>
                 <% } %>
                 <% } %>
+                <tfoot>
                 <tr>
                     <td></td>
                     <td></td>
@@ -309,14 +374,89 @@
                     <td><%=rejected%></td>
                     <td></td>
                 </tr>
+                </tfoot>
             </table>
         </div>
         <% } %>
-        <% } %>
-
-
+        </div>
+        </div>
     </div>
 </div>
 <script src="javascripts/dashboard.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/datatables.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+
+<script>  $(document).ready( function () {
+
+    $('#allTable').DataTable( {
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+    $('#ugTable').DataTable( {
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+    $('#pgtTable').DataTable( {
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+    $('#pgrTable').DataTable( {
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+    $('#sraTable').DataTable( {
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+    $('#facultyTable').DataTable( {
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+    $('#otherTable').DataTable( {
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+});
+</script>
 <%- include partials/confirm-logout.ejs %>
 <%- include partials/end.ejs %>
