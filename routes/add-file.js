@@ -19,6 +19,8 @@ router.post('/', function (req, res) {
     // CHECK USER IS LOGGED IN
     if(req.session.user) {
 
+        if(req.files.file!==null){
+
         var code = req.body.code; var seq = req.body.seq;
         const dir = './public/files/' + code + '/' + seq + '/';
         if (!fs.existsSync(dir)) {
@@ -73,6 +75,9 @@ router.post('/', function (req, res) {
     } else {
         console.log("You do not have the correct permissions to perform this task.");
         res.redirect('/restricted');
+    }
+    } else {
+        console.log('Error');
     }
 });
 

@@ -1,0 +1,28 @@
+<%- include partials/begin.ejs %>
+<%- include partials/navigation.ejs %>
+<div class="container">
+    <div class="jumbotron" style="background-color: #FFF">
+        <% if(admin==true){ %>
+        If you are redirected to the dashboard, your request has been successful.
+        <form  class="form-row" action="/admin-rights" method="post">
+
+            <div class="form-group col-md-8">
+                <label for="username" class="control-label">Username*</label>
+                <input name="username" class="form-control" id="username" placeholder="Username" required>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="confirm" class="control-label">Confirm*</label>
+                <input type="checkbox" name="confirm" class="form-control" id="confirm" required>
+            </div>
+
+            <div class="form-group col-md-12">
+                <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Change Rights</button>
+            </div>
+
+        </form>
+        <% } %>
+    </div>
+</div>
+<%- include partials/confirm-logout.ejs %>
+<%- include partials/end.ejs %>

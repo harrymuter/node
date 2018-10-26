@@ -81,9 +81,9 @@ $(document).ready(function() {
         var form = getUrlVars($(this).serialize());
         var newform = $("#newForm");
 
-        if (form.required = "no") {
+        if (form.required === "no") {
             var html = '<div class="row col-12 ' + stamp + '" data-identifier="' + stamp + '">' +
-                '<div class="row col-12"><label class="col-4 col-form-label" for="' + stamp + '">' + unescape(form.select_input).trim() + '</label>' +//abba
+                '<div class="row col-12"><label class="col-4 col-form-label" for="' + stamp + '">' + unescape(form.select_input).trim() + '</label>' +
                 '<div class="form-group col-4">' +
                 '<select name="' + stamp + '" id="' + stamp + '" class="form-control">';
 
@@ -105,29 +105,27 @@ $(document).ready(function() {
             newform.append(html);
         } else {
             var html = '<div class="row col-12 ' + stamp + '" data-identifier="' + stamp + '">' +
-                '<div class="row col-12"><label class="col-4 col-form-label" for="' + stamp + '">' + unescape(form.select_input).trim() + ' *' + '</label>' +
+                '<div class="row col-12"><label class="col-4 col-form-label" for="' + stamp + '">' + unescape(form.select_input).trim() + ' *</label>' +
                 '<div class="form-group col-4">' +
-                '<select name="' + stamp + '" id="' + stamp + '" class="form-control" required>';
+                '<select name="' + stamp + '" id="' + stamp + '" class="form-control">';
 
             for (var i = 0; i < custom_select.length; i++) {
                 var option = custom_select[i] + '_option';
                 var val = custom_select[i] + '_val';
-                if (form[val] !== "" && form[option] !== "") {
-                    html += '<option value="' + unescape(form[val]).trim() + '">' + unescape(form[option]).trim() + '</option>';
-                }
-
-                html += '</select>' +
-                    '</div>' +
-                    '<div class="form-group col-3"></div>' +
-                    '</div>' +
-                    '<div class="col-1 move" data-identifier="' + stamp + '"  data-direction="up"><span class="alert alert-warning glyphicon glyphicon-circle-arrow-up"></span></div>' +
-                    '<div class="col-10 delete" data-identifier="' + stamp + '"><span class="col-12 alert alert-danger glyphicon glyphicon-remove"></span></div>' +
-                    '<div class="col-1 move" data-identifier="' + stamp + '"  data-direction="down"><span class="alert alert-warning glyphicon glyphicon-circle-arrow-down"></span></div>' +
-                    '</div>';
-                newform.append(html);
-
+                if (form[val] !== "" && form[option] !== "")
+                    html += '<option value="' + unescape(form[val]).trim() + '" required>' + unescape(form[option]).trim() + '</option>';
             }
-        }
+
+            html += '</select>' +
+                '</div>' +
+                '<div class="form-group col-3"></div>' +
+                '</div>' +
+                '<div class="col-1 move" data-identifier="' + stamp + '"  data-direction="up"><span class="alert alert-warning glyphicon glyphicon-circle-arrow-up"></span></div>' +
+                '<div class="col-10 delete" data-identifier="' + stamp + '"><span class="col-12 alert alert-danger glyphicon glyphicon-remove"></span></div>' +
+                '<div class="col-1 move" data-identifier="' + stamp + '"  data-direction="down"><span class="alert alert-warning glyphicon glyphicon-circle-arrow-down"></span></div>' +
+                '</div>';
+            newform.append(html);
+            }
 
         custom_select = [];
         array_of_questions.push(stamp);

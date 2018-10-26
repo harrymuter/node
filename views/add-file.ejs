@@ -19,14 +19,14 @@
                 <div class="custom-file">
                     <input type="hidden" name="seq" value="<%= query.seq %>" class="custom-file-input">
                     <input type="hidden" name="code" value="<%= query.code %>" class="custom-file-input">
-                    <input type="file" name="file" class="custom-file-input" id="file">
+                    <input type="file" name="file" class="custom-file-input" id="file" accept=".pdf,.doc,.docx">
                     <label id="file_label" class="custom-file-label pointer" for="file">Click to add a file</label>
                 </div>
             </div>
 
             <div class="row" style="padding-bottom: 1em;"></div>
 
-            <button type="submit" class="btn btn-success">Add File <span class="glyphicon glyphicon-plus"></span></button>
+            <button type="submit" id="submit_form" class="btn btn-success" disabled>Add File <span class="glyphicon glyphicon-plus"></span></button>
             <a href="/dashboard" ><div class="btn btn-secondary">Finish Without <span class="glyphicon glyphicon-chevron-right"></span></div></a>
 
             <div class="row" style="padding-bottom: 4em;"></div>

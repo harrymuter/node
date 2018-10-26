@@ -6,4 +6,12 @@ jQuery(function($) {
         $('#file_name').val(filename);
     });
 
+    $('#file').change(function () {
+        if($(this).val()!==""){
+            $('#submit_form').removeAttr("disabled");
+        } else {
+            $('#submit_form').attr("disabled", "disabled");
+        }
+    });
+
 });

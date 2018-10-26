@@ -74,6 +74,7 @@ var overview = require('./routes/overview');
 var toggleDisabled = require('./routes/toggle-disabled');
 var highPriority = require('./routes/show-high-priority');
 var checkUsername = require('./routes/check-username');
+var adminRights = require('./routes/admin-rights');
 
 var app = express();
 app.locals.moment = moment;
@@ -128,6 +129,7 @@ app.use('/toggle-disabled', toggleDisabled);
 app.use('/high-priority', highPriority);
 app.use('/check-username', checkUsername);
 app.use('/overview', overview);
+app.use('/admin-rights', adminRights);
 
 
 //

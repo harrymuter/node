@@ -81,6 +81,8 @@ return time;
                 <a class="btn btn-danger<% if(form.status==='review') {%> disabled<%}%>" <% if(form.status==='review') {%> aria-disbaled="true"<%}%> role="button" href="#"<% if(form.status!=='review') {%> data-toggle="modal" data-target="#markAsDenied"<%}%>>Deny</a>
                 <% } %>
             </form>
+            <div class="top-buffer"></div>
+            <a class="btn btn-primary" href="add-file?code=<%=encodeURIComponent(form.code)%>&seq<%=encodeURIComponent(form.seq)%>">Add a File</a>
         </div>
         <% if(admin){ %>
         <div class="jumbotron" style="padding-top:0;margin-top:0;background-color: #FFFFFF;">

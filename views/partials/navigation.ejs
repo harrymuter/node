@@ -32,8 +32,6 @@
                     <a class="dropdown-item <% switch (page_name) {
                 case 'forms-module':
                 %> active<% }%>" href="forms?type=module">Module Form</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">What do I need?</a>
                 </div>
             </li>
 
@@ -43,6 +41,7 @@
                 case 'update-form':
                 case 'high-priority':
                 case 'overview':
+                case 'admin-rights':
                 %> active<% }%>">
                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Admin Panel
@@ -60,6 +59,8 @@
                 case 'high-priority': %> active<% } %>" href="/high-priority">High Priority</a>
                 <a class="dropdown-item<% switch (page_name) {
                 case 'overview': %> active<% } %>" href="/overview">Overview</a>
+                    <a class="dropdown-item<% switch (page_name) {
+                case 'admin-rights': %> active<% } %>" href="/admin-rights">Nominate Admin</a>
                 </div>
             </li>
 

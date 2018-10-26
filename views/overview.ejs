@@ -129,7 +129,7 @@
                                         <td></td>
                                         <td><span class="glyphicon glyphicon glyphicon-ok"></span></td>
                                     <%}%>
-                                <td><a href="view-application?code=<%-encodeURI(forms[i].code)%>&seq=<%=forms[i].seq%>"><%-forms[i].code+'/'+forms[i].seq%></a></td>
+                                <td><a href="view-application?code=<%=encodeURI(forms[i].code)%>&seq=<%=forms[i].seq%>"><%-forms[i].code+'/'+forms[i].seq%></a></td>
                             </tr>
                         <% } %>
                     <% } %>
